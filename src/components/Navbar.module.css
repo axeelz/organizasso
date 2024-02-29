@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: var(--separator);
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ul > li > a {
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+}
+
+.ul > li > a:hover {
+  background-color: #f4f4f4;
+}
+
+.logo {
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+}

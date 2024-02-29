@@ -7,6 +7,9 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+
+  --border-radius: 5px;
+  --separator: 1px solid #eaeaea;
 }
 
 body {
@@ -15,6 +18,7 @@ body {
   min-height: 100vh;
 }
 
-header {
-  text-align: center;
+main {
+  padding: 1rem;
+  min-height: 70vh;
 }
