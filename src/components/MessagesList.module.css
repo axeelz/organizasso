@@ -27,3 +27,16 @@
   font-size: 0.8rem;
   color: #666;
 }
+
+.replies {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.replies .message {
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  background-color: #f4f4f4;
+}
