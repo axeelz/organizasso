@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { useState } from "react";
+import { IoSearch } from "react-icons/io5";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,10 +9,15 @@ const Navbar = () => {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>
-        <h1>Organiz'Asso</h1>
+        Organiz'Asso
       </Link>
       <nav>
         <ul className={styles.ul}>
+          <li>
+            <Link to="search">
+              <IoSearch />
+            </Link>
+          </li>
           {(!isLoggedIn && (
             <li>
               <Link to="login">Connexion</Link>

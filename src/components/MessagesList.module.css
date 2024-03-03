@@ -1,0 +1,28 @@
+.messagesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.message h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.message {
+  padding: 1rem;
+}
+
+.message:not(:last-child) {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.messageHeader span {
+  font-size: 0.8rem;
+  color: #666;
+}

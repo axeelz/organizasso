@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
@@ -17,7 +17,12 @@ const SignUp = () => {
   return (
     <main>
       <h2>Inscription</h2>
-      <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Nom d'utilisateur"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
       <input
         type="password"
         placeholder="Mot de passe"

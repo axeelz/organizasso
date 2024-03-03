@@ -12,6 +12,9 @@
 }
 
 .ul {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -22,6 +25,14 @@
   color: #333;
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul svg {
+  height: 24px;
+  width: 24px;
 }
 
 .ul > li > a:hover {
@@ -29,7 +40,8 @@
 }
 
 .logo {
-  font-size: 1rem;
   color: #333;
   text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
 }

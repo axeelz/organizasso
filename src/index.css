@@ -8,8 +8,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 
-  --border-radius: 5px;
+  --border-radius: 12px;
   --separator: 1px solid #eaeaea;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -21,4 +25,6 @@ body {
 main {
   padding: 1rem;
   min-height: 70vh;
+  max-width: 1000px;
+  margin: 0 auto;
 }
