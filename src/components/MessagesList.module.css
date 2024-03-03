@@ -3,9 +3,10 @@
   flex-direction: column;
 }
 
-.message h4 {
-  margin: 0;
-  padding: 0;
+.username {
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
 }
 
 .message {

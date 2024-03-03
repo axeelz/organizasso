@@ -16,7 +16,7 @@ const SignUp = () => {
 
   return (
     <main>
-      <h2>Inscription</h2>
+      <h1>Inscription</h1>
       <input
         type="text"
         placeholder="Nom d'utilisateur"

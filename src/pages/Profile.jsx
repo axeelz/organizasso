@@ -1,8 +1,12 @@
+import { useParams } from "react-router-dom";
+
 const Profile = () => {
+  const { username } = useParams();
+
   return (
-    <div>
-      <h1>Profil</h1>
-    </div>
+    <main>
+      <h1>Profil de {username}</h1>
+    </main>
   );
 };
 

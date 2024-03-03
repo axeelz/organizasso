@@ -12,7 +12,7 @@ const Login = () => {
 
   return (
     <main>
-      <h2>Connexion</h2>
+      <h1>Connexion</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

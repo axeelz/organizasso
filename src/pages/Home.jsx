@@ -4,7 +4,7 @@ import styles from "./Home.module.css";
 const Home = () => {
   return (
     <main>
-      <h2 className={styles.title}>Bienvenue sur Organiz'Asso !</h2>
+      <h1 className={styles.title}>Bienvenue sur Organiz'Asso !</h1>
       <MessagesList />
     </main>
   );

@@ -1,6 +1,7 @@
 import styles from "./MessagesList.module.css";
 import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
+import { Link } from "react-router-dom";
 
 const MessagesList = ({
   messages = [
@@ -23,8 +24,10 @@ const MessagesList = ({
       {messages.map((message) => (
         <div key={message.id} className={styles.message}>
           <div className={styles.messageHeader}>
-            <h4>@{message.username}</h4>
-            <span>{formatDistance(new Date(message.date), new Date(), { addSuffix: true, locale: fr })}</span>
+            <Link to={`profile/${message.username}`} className={styles.username}>
+              @{message.username}
+            </Link>
+            <span>· {formatDistance(new Date(message.date), new Date(), { addSuffix: true, locale: fr })}</span>
           </div>
           <p>{message.content}</p>
         </div>
