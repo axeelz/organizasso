@@ -4,13 +4,26 @@
 }
 
 .leftContainer {
-  width: 60%;
+  width: 55%;
+  background-color: rgba(0, 0, 0, 0.5);
   background-image: url("https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-size: cover;
 }
 
+@media (max-width: 992px) {
+  .leftContainer {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftContainer {
+    display: none;
+  }
+}
+
 .rightContainer {
-  width: 40%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,8 +47,7 @@
 }
 
 .header p {
-  line-height: 1.25rem;
-  color: #71717a;
+  color: var(--text-muted);
 }
 
 .form {
@@ -47,9 +59,9 @@
 
 .form input {
   padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+  border: var(--separator);
   border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 
 .form button {
@@ -59,18 +71,22 @@
   border-radius: var(--border-radius);
   background-color: black;
   color: white;
-  cursor: pointer;
+  box-shadow: var(--shadow);
 }
 
 .signup {
-  line-height: 1.25rem;
-  color: #71717a;
+  color: var(--text-muted);
   margin-top: 1rem;
   text-align: center;
 }
 
 .signup a {
-  color: black;
+  color: var(--text-muted);
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
   font-weight: bold;
-  text-decoration: none;
+}
+
+.signup a:hover {
+  color: black;
 }
