@@ -39,9 +39,12 @@ ul svg {
   background-color: #f4f4f4;
 }
 
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logo {
-  color: inherit;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 700;
+  height: 32px;
 }
