@@ -1,4 +1,4 @@
-.login {
+.container {
   display: flex;
   height: calc(100vh - 71px);
 }
@@ -6,7 +6,7 @@
 .leftContainer {
   width: 55%;
   background-color: rgba(0, 0, 0, 0.5);
-  background-image: url("https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-image: url("https://source.unsplash.com/random/?nature");
   background-size: cover;
 }
 
@@ -74,19 +74,19 @@
   box-shadow: var(--shadow);
 }
 
-.signup {
+.redirect {
   color: var(--text-muted);
   margin-top: 1rem;
   text-align: center;
 }
 
-.signup a {
+.redirect a {
   color: var(--text-muted);
   text-decoration-line: underline;
   text-underline-offset: 4px;
   font-weight: bold;
 }
 
-.signup a:hover {
+.redirect a:hover {
   color: black;
 }

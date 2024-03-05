@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Login.module.css";
+import styles from "./Registration.module.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.login}>
+    <div className={styles.container}>
       <div className={styles.leftContainer}></div>
       <div className={styles.rightContainer}>
         <div className={styles.header}>
@@ -22,12 +22,14 @@ const Login = () => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
+            id="username"
             placeholder="Nom d'utilisateur"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"
+            id="password"
             placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -36,7 +38,7 @@ const Login = () => {
             Connexion
           </button>
         </form>
-        <p className={styles.signup}>
+        <p className={styles.redirect}>
           Tu n'as pas de compte ? <Link to="/signup">Inscris toi !</Link>
         </p>
       </div>
