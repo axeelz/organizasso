@@ -6,7 +6,7 @@ const Search = () => {
 
   return (
     <main>
-      <h1>Recherche</h1>
+      <h1>Rechercher</h1>
       <input
         className={styles.searchInput}
         type="text"

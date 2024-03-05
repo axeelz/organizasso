@@ -1,0 +1,38 @@
+.username {
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+}
+
+.message {
+  padding: 1.25rem 0;
+}
+
+.message:not(:last-child) {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.messageHeader span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.messageFooter {
+  display: flex;
+  align-items: center;
+}
+
+.messageFooter button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  background-color: transparent;
+  padding: 0;
+}

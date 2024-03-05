@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  border-bottom: var(--separator);
+  border-bottom: var(--border);
 }
 
 .header h1 {

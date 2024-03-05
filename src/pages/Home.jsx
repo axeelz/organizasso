@@ -1,12 +1,19 @@
 import MessagesList from "../components/MessagesList";
+import NewMessage from "../components/NewMessage";
 import styles from "./Home.module.css";
 
 const Home = () => {
   return (
-    <main>
-      <h1 className={styles.title}>Bienvenue sur Organiz'Asso !</h1>
-      <MessagesList />
-    </main>
+    <>
+      <section className={styles.hero}>
+        <span>Bienvenue sur le</span>
+        <h1>Forum ouvert</h1>
+      </section>
+      <main>
+        <NewMessage />
+        <MessagesList />
+      </main>
+    </>
   );
 };
 

@@ -11,8 +11,13 @@
   --text-color: #333;
   --text-muted: #71717a;
   --border-radius: 12px;
-  --separator: 1px solid #eaeaea;
+  --border: 1px solid #eaeaea;
   --shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  --primary-bg-color: #01696c;
+  --primary-text-color: #fff;
+
+  --header-height: 71px;
 }
 
 * {
@@ -27,19 +32,23 @@ body {
 }
 
 main {
-  padding: 1rem;
-  min-height: 70vh;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - var(--header-height));
   max-width: 1000px;
   margin: 0 auto;
 }
 
 input,
+textarea,
 button {
   font-family: inherit;
   font-size: inherit;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
 }
 
 button {
   cursor: pointer;
   font-weight: 500;
+  border: none;
 }

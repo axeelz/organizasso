@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  height: calc(100vh - 71px);
+  height: calc(100vh - var(--header-height));
 }
 
 .leftContainer {
@@ -59,16 +59,13 @@
 
 .form input {
   padding: 0.5rem 1rem;
-  border: var(--separator);
-  border-radius: var(--border-radius);
+  border: var(--border);
   box-shadow: var(--shadow);
 }
 
 .form button {
-  padding: 0.5rem 1rem;
   font-size: 1rem;
   border: none;
-  border-radius: var(--border-radius);
   background-color: black;
   color: white;
   box-shadow: var(--shadow);

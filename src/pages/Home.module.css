@@ -1,4 +1,19 @@
-.title {
-  font-size: 2rem;
+.hero {
+  padding: 3rem 1rem;
   text-align: center;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+}
+
+.hero h1 {
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.1rem;
+  font-size: 2.5rem;
+  line-height: 3rem;
+}
+
+.hero span {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
