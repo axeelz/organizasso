@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Registration.module.css";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
+    setIsLoggedIn(true);
   };
 
   return (

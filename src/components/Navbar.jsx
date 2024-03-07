@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import logo from "../assets/logo.png";
 
-const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.link}>
@@ -25,7 +22,7 @@ const Navbar = () => {
             </li>
           )) || (
             <li>
-              <Link to="/">Déconnexion</Link>
+              <button onClick={() => setIsLoggedIn(false)}>Déconnexion</button>
             </li>
           )}
         </ul>

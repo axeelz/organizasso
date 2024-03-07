@@ -1,0 +1,13 @@
+.container {
+  margin-bottom: 1.5rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+  opacity: 0.8;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+}

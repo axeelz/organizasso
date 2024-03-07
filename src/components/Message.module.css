@@ -2,6 +2,14 @@
   font-weight: 600;
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.username svg {
+  fill: var(--primary-bg-color);
+  opacity: 0.8;
 }
 
 .message {
@@ -26,6 +34,8 @@
 .messageFooter {
   display: flex;
   align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .messageFooter button {

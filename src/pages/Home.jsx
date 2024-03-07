@@ -1,18 +1,14 @@
-import MessagesList from "../components/MessagesList";
-import NewMessage from "../components/NewMessage";
-import styles from "./Home.module.css";
+import AskToLogin from "../components/AskToLogin";
+import ForumsList from "../components/ForumsList";
 
-const Home = () => {
+const Home = ({ isLoggedIn }) => {
+  if (!isLoggedIn) {
+    return <AskToLogin />;
+  }
+
   return (
     <>
-      <section className={styles.hero}>
-        <span>Bienvenue sur le</span>
-        <h1>Forum ouvert</h1>
-      </section>
-      <main>
-        <NewMessage />
-        <MessagesList />
-      </main>
+      <ForumsList />
     </>
   );
 };

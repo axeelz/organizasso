@@ -6,12 +6,14 @@ const MessagesList = ({
     {
       id: 1,
       username: "johndoe",
+      isAdmin: true,
       date: "2024-03-02T12:00:00",
       content: "This is the first message",
     },
     {
       id: 2,
       username: "janedoe",
+      isAdmin: false,
       date: "2024-03-03T20:12:00",
       content: "This is the second message",
     },

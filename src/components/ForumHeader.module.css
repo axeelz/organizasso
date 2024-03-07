@@ -1,8 +1,16 @@
 .hero {
   padding: 3rem 1rem;
   text-align: center;
+}
+
+.hero[data-forum="ouvert"] {
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
+}
+
+.hero[data-forum="fermé"] {
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-text-color);
 }
 
 .hero h1 {

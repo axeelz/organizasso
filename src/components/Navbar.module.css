@@ -24,10 +24,16 @@
   text-decoration: none;
   color: inherit;
   padding: 0.5rem 1rem;
+  font-weight: 500;
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.ul > li > button {
+  background-color: inherit;
+  padding: 0.5rem 1rem;
 }
 
 ul svg {
@@ -35,7 +41,8 @@ ul svg {
   width: 24px;
 }
 
-.ul > li > a:hover {
+.ul > li > a:hover,
+.ul > li > button:hover {
   background-color: #f4f4f4;
 }
 
