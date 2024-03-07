@@ -2,11 +2,10 @@ import { useState } from "react";
 import styles from "./NewMessage.module.css";
 import { IoIosSend } from "react-icons/io";
 
-const NewMessage = ({ onSend }) => {
+const NewMessage = ({ isReply }) => {
   const [message, setMessage] = useState("");
 
   const handleSend = () => {
-    onSend(message);
     setMessage("");
   };
 
@@ -15,8 +14,7 @@ const NewMessage = ({ onSend }) => {
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        className={styles.textarea}
-        placeholder="Nouveau message"
+        placeholder={isReply ? "Répondre à ce message" : "Nouveau message"}
       />
       <button onClick={handleSend} className={styles.send}>
         <IoIosSend />

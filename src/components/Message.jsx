@@ -3,8 +3,12 @@ import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Link } from "react-router-dom";
 import { BsFillReplyFill } from "react-icons/bs";
+import { useState } from "react";
+import NewMessage from "./NewMessage";
 
 const Message = ({ message }) => {
+  const [isReplying, setIsReplying] = useState(false);
+
   return (
     <div key={message.id} className={styles.message}>
       <div className={styles.messageHeader}>
@@ -15,11 +19,16 @@ const Message = ({ message }) => {
       </div>
       <p>{message.content}</p>
       <div className={styles.messageFooter}>
-        <button>
+        <button onClick={() => setIsReplying(!isReplying)}>
           <BsFillReplyFill />
           <span>Répondre</span>
         </button>
       </div>
+      {isReplying && (
+        <div className={styles.newMessage}>
+          <NewMessage isReply />
+        </div>
+      )}
     </div>
   );
 };

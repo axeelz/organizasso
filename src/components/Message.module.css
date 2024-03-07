@@ -36,3 +36,7 @@
   background-color: transparent;
   padding: 0;
 }
+
+.newMessage {
+  margin-top: 1rem;
+}
