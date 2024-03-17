@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
 import { IoWarning } from "react-icons/io5";
 
-const SignUp = ({ setIsLoggedIn }) => {
+const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
@@ -21,8 +21,7 @@ const SignUp = ({ setIsLoggedIn }) => {
       return;
     }
     setErrors({ ...errors, repeatedPassword: "" });
-    setIsLoggedIn(true);
-    navigate("/");
+    navigate("/login");
   };
 
   return (
