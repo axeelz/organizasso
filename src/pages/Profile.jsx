@@ -6,8 +6,8 @@ const Profile = () => {
 
   return (
     <main>
-      <h1>Profil de {username}</h1>
-      <MessagesList username={username} />
+      {(username && <h1>Profil de {username}</h1>) || <h1>Mon profil</h1>}
+      {(username && <MessagesList username={username} />) || <MessagesList />}
     </main>
   );
 };

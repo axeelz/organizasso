@@ -58,4 +58,9 @@ button {
   cursor: pointer;
   font-weight: 500;
   border: none;
+  transition: transform 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
 }
