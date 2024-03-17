@@ -5,7 +5,6 @@
 
 .container textarea {
   width: 100%;
-  padding: 1rem;
   border: var(--border);
   resize: none;
   box-shadow: var(--shadow);

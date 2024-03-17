@@ -87,3 +87,11 @@
 .redirect a:hover {
   color: black;
 }
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #cc0000;
+  font-size: 0.875rem;
+}

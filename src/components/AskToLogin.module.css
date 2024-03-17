@@ -1,9 +1,9 @@
 .container {
   text-align: center;
 
-  background-color: #e5e5f7;
-  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, rgba(229, 229, 247, 0.2) 27px),
-    repeating-linear-gradient(rgba(1, 105, 108, 0.2), rgba(1, 105, 108, 0.2));
+  background-color: #ffffff;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255, 255, 255, 0.1) 33px),
+    repeating-linear-gradient(rgba(1, 105, 108, 0.2), rgba(1, 105, 108, 0.1));
 
   height: calc(100vh - var(--header-height));
   display: flex;
@@ -11,18 +11,22 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  padding: 1rem;
 }
 
 .container h1 {
   font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
   margin: 0;
   padding: 0;
 }
 
 .container > div {
-  max-width: 400px;
+  color: var(--text-muted);
+  max-width: 450px;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .link {

@@ -1,19 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
+import { IoWarning } from "react-icons/io5";
 
-const SignUp = () => {
+const SignUp = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    repeatedPassword: "",
+  });
+  const navigate = useNavigate();
 
-  const handleSignup = async () => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    } catch (error) {
-      setError(error.message);
+  const handleSignup = (e) => {
+    e.preventDefault();
+    if (password !== repeatedPassword) {
+      setErrors({ ...errors, repeatedPassword: "Les mots de passe ne correspondent pas" });
+      return;
     }
+    setErrors({ ...errors, repeatedPassword: "" });
+    setIsLoggedIn(true);
+    navigate("/");
   };
 
   return (
@@ -45,11 +54,17 @@ const SignUp = () => {
             placeholder="Répéter le mot de passe"
             value={repeatedPassword}
             onChange={(e) => setRepeatedPassword(e.target.value)}
+            onFocus={() => setErrors({ ...errors, repeatedPassword: "" })}
           />
+          {errors.repeatedPassword && (
+            <span className={styles.error}>
+              <IoWarning />
+              {errors.repeatedPassword}
+            </span>
+          )}
           <button type="submit" className={styles.button}>
             Inscription
           </button>
-          {error && <p>{error}</p>}
         </form>
         <p className={styles.redirect}>
           Tu as déjà un compte ? <Link to="/login">Connecte toi !</Link>
