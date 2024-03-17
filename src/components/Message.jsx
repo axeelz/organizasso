@@ -13,7 +13,7 @@ const Message = ({ message }) => {
   return (
     <div key={message.id} className={styles.message}>
       <div className={styles.messageHeader}>
-        <Link to={`profile/${message.username}`} className={styles.username}>
+        <Link to={`/profile/${message.username}`} className={styles.username}>
           @{message.username}
           {message.isAdmin && <RiVerifiedBadgeFill />}
         </Link>

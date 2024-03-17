@@ -18,7 +18,12 @@ const MessagesList = ({
       content: "This is the second message",
     },
   ],
+  username,
 }) => {
+  if (username) {
+    messages = messages.filter((message) => message.username === username);
+  }
+
   return (
     <section className={styles.messagesList}>
       {messages.map((message) => (

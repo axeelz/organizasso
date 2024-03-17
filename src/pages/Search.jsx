@@ -14,6 +14,16 @@ const Search = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
+
+      <div className={styles.filters}>
+        <span>Messages entre le</span>
+        <input type="date" />
+        <span>et le</span>
+        <input type="date" />
+      </div>
+
+      <hr className={styles.separator} />
+
       <p>Résultats pour "{query || "..."}"</p>
     </main>
   );

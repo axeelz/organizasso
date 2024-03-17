@@ -9,6 +9,7 @@ import Search from "./pages/Search.jsx";
 import ForumOuvert from "./pages/ForumOuvert.jsx";
 import ForumFerme from "./pages/ForumFerme.jsx";
 import { useState } from "react";
+import Admin from "./pages/Admin.jsx";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="search" element={<Search />} />
           <Route path="forum-ouvert" element={<ForumOuvert />} />
           <Route path="forum-ferme" element={<ForumFerme />} />
+          <Route path="admin" element={<Admin />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
