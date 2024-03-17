@@ -3,6 +3,8 @@ import styles from "./Search.module.css";
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   return (
     <main>
@@ -17,9 +19,9 @@ const Search = () => {
 
       <div className={styles.filters}>
         <span>Messages entre le</span>
-        <input type="date" />
+        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         <span>et le</span>
-        <input type="date" />
+        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
       </div>
 
       <hr className={styles.separator} />
