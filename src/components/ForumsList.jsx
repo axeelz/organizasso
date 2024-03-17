@@ -13,12 +13,12 @@ const ForumsList = () => {
       </section>
       <ul className={styles.list}>
         <li>
-          <Link to="forum-ouvert">
+          <Link to="/forum/ouvert">
             <ForumHeader name="ouvert" nameOnly />
           </Link>
         </li>
         <li>
-          <Link to="forum-ferme">
+          <Link to="/forum/ferme">
             <ForumHeader name="fermé" nameOnly />
           </Link>
         </li>

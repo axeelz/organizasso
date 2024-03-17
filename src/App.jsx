@@ -6,10 +6,9 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import Profile from "./pages/Profile.jsx";
 import Search from "./pages/Search.jsx";
-import ForumOuvert from "./pages/ForumOuvert.jsx";
-import ForumFerme from "./pages/ForumFerme.jsx";
 import { useState } from "react";
 import Admin from "./pages/Admin.jsx";
+import Forum from "./pages/Forum.jsx";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,8 +23,7 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="profile/:username" element={<Profile />} />
           <Route path="search" element={<Search />} />
-          <Route path="forum-ouvert" element={<ForumOuvert />} />
-          <Route path="forum-ferme" element={<ForumFerme />} />
+          <Route path="forum/:name" element={<Forum />} />
           <Route path="admin" element={<Admin />} />
 
           <Route path="*" element={<NotFound />} />
