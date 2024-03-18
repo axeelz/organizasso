@@ -39,7 +39,7 @@ main {
 
 main,
 .spacing {
-  padding: 2rem 1rem;
+  padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
 }
