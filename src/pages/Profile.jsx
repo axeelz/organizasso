@@ -2,10 +2,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import MessagesList from "../components/MessagesList";
 import { IoArrowBack } from "react-icons/io5";
 import styles from "./Profile.module.css";
+import { messages } from "../data/sample";
 
 const Profile = () => {
   const { username } = useParams();
   const navigate = useNavigate();
+
+  const title = username ? `Profil de ${username}` : "Mon profil";
 
   return (
     <main>
@@ -13,8 +16,8 @@ const Profile = () => {
         <IoArrowBack />
         <span>Retour</span>
       </button>
-      {(username && <h1>Profil de {username}</h1>) || <h1>Mon profil</h1>}
-      {(username && <MessagesList username={username} />) || <MessagesList />}
+      <h1>{title}</h1>
+      <MessagesList messages={messages} username={username} />
     </main>
   );
 };

@@ -6,16 +6,19 @@ import { BsFillReplyFill, BsFillTrashFill } from "react-icons/bs";
 import { useState } from "react";
 import NewMessage from "./NewMessage";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { users } from "../data/sample";
 
 const Message = ({ message }) => {
   const [isReplying, setIsReplying] = useState(false);
 
+  const user = users.find((user) => user.id === message.userId);
+
   return (
     <div key={message.id} className={styles.message}>
       <div className={styles.messageHeader}>
-        <Link to={`/profile/${message.username}`} className={styles.username}>
-          @{message.username}
-          {message.isAdmin && <RiVerifiedBadgeFill />}
+        <Link to={`/profile/${user.username}`} className={styles.username}>
+          @{user.username}
+          {user.isAdmin && <RiVerifiedBadgeFill />}
         </Link>
         <span>· {formatDistance(new Date(message.date), new Date(), { addSuffix: true, locale: fr })}</span>
       </div>
@@ -29,7 +32,7 @@ const Message = ({ message }) => {
           <BsFillTrashFill />
           <span>Supprimer</span>
         </button>
-        {!message.isAdmin && (
+        {!user.isAdmin && (
           <button>
             <RiVerifiedBadgeFill />
             <span>Rendre admin.</span>

@@ -3,6 +3,7 @@ import NewMessage from "../components/NewMessage";
 import ForumHeader from "../components/ForumHeader";
 import BackToList from "../components/BackToList";
 import { useParams, Navigate } from "react-router-dom";
+import { messages } from "../data/sample";
 
 const Forum = () => {
   const { name } = useParams();
@@ -13,6 +14,7 @@ const Forum = () => {
   }
 
   const displayName = name === "ouvert" ? "ouvert" : "fermé";
+  const forumMessages = messages.filter((message) => message.forum === name);
 
   return (
     <>
@@ -20,7 +22,7 @@ const Forum = () => {
       <main>
         <BackToList />
         <NewMessage />
-        <MessagesList />
+        <MessagesList messages={forumMessages} />
       </main>
     </>
   );

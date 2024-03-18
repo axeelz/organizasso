@@ -1,19 +1,7 @@
 import styles from "./UsersList.module.css";
+import { users } from "../data/sample";
 
-const UsersList = ({
-  users = [
-    {
-      id: 1,
-      username: "johndoe",
-      isAdmin: false,
-    },
-    {
-      id: 2,
-      username: "janedoe",
-      isAdmin: true,
-    },
-  ],
-}) => {
+const UsersList = () => {
   return (
     <section className={styles.usersList}>
       {users.map((user) => (
