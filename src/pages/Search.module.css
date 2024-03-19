@@ -1,8 +1,31 @@
+.searchContainer {
+  display: flex;
+  gap: 1rem;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  cursor: text;
+}
+
+.searchContainer:focus-within {
+  border: 1px solid #ccc;
+}
+
+.searchContainer:focus-within .iconContainer {
+  color: var(--text-color);
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
 .searchInput {
   width: 100%;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
+  border: none;
+  outline: none;
 }
 
 .filters {
@@ -19,5 +42,7 @@
 
 .separator {
   margin: 3rem 0;
-  border: var(--border);
+  border: none;
+  height: 1px;
+  background-color: var(--border-color);
 }
