@@ -8,6 +8,10 @@ const MessagesList = ({ messages, username }) => {
     messages = messages.filter((message) => message.userId === user.id);
   }
 
+  if (messages.length === 0) {
+    return <p className={styles.empty}>Aucun message pour le moment</p>;
+  }
+
   return (
     <section className={styles.messagesList}>
       {messages.map((message) => (
