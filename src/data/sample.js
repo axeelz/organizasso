@@ -34,10 +34,20 @@ export const users = [
     id: 1,
     username: "johndoe",
     isAdmin: false,
+    createdAt: "2024-03-02T12:00:00",
   },
   {
     id: 2,
     username: "janedoe",
     isAdmin: true,
+    createdAt: "2024-03-03T20:12:00",
+  },
+  {
+    id: 3,
+    username: "loggeduser",
+    isAdmin: true,
+    createdAt: "2024-03-03T20:12:00",
   },
 ];
+
+export const loggedInUser = users[2];
