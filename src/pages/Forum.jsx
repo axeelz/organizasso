@@ -1,9 +1,10 @@
 import MessagesList from "../components/MessagesList";
 import NewMessage from "../components/NewMessage";
 import ForumHeader from "../components/ForumHeader";
-import BackToList from "../components/BackToList";
 import { useParams, Navigate } from "react-router-dom";
 import { messages } from "../data/sample";
+import styles from "./Forum.module.css";
+import BackButton from "../components/BackButton";
 
 const Forum = () => {
   const { name } = useParams();
@@ -20,7 +21,9 @@ const Forum = () => {
     <>
       <ForumHeader name={displayName} />
       <main>
-        <BackToList />
+        <div className={styles.backContainer}>
+          <BackButton to="/" text="Liste des forums" />
+        </div>
         <NewMessage />
         <MessagesList messages={forumMessages} />
       </main>
