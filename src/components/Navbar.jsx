@@ -1,41 +1,50 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import { IoSearch } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
+import { IoHome, IoSearch, IoPersonCircle, IoShieldCheckmarkSharp, IoLogIn } from "react-icons/io5";
 import logo from "../assets/logo.png";
+import { loggedInUser } from "../data/sample";
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-  const navigate = useNavigate();
-
-  const logout = () => {
-    setIsLoggedIn(false);
-    navigate("/");
-  };
-
+const Navbar = ({ isLoggedIn }) => {
   return (
-    <header className={styles.header}>
-      <Link to="/" className={styles.link}>
-        <img src={logo} alt="Organiz'Asso" className={styles.logo} />
+    <header className={styles.container}>
+      <Link to="/" className={styles.logoLink}>
+        <img src={logo} alt="Organiz'Asso" />
       </Link>
+
       <nav>
         <ul className={styles.ul}>
+          <li className="mobile-only">
+            <Link to="/">
+              <IoHome />
+            </Link>
+          </li>
           <li>
             <Link to="search">
               <IoSearch />
+              <span className="desktop-only">Recherche</span>
             </Link>
           </li>
           {(!isLoggedIn && (
             <li>
-              <Link to="login">Connexion</Link>
+              <Link to="login">
+                <IoLogIn />
+                <span className="desktop-only">Connexion</span>
+              </Link>
             </li>
           )) || (
             <>
-              <li>
-                <button onClick={logout}>Deconnexion</button>
-              </li>
+              {loggedInUser.isAdmin && (
+                <li>
+                  <Link to="admin">
+                    <IoShieldCheckmarkSharp />
+                    <span className="desktop-only">Admin</span>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link to="profile">
-                  <FaUserCircle />
+                  <IoPersonCircle />
+                  <span className="desktop-only">Profil</span>
                 </Link>
               </li>
             </>

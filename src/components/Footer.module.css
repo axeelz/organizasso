@@ -4,3 +4,10 @@
   text-align: center;
   color: var(--text-muted);
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding-bottom: calc(var(--header-height) + 1rem);
+    border-top: none;
+  }
+}

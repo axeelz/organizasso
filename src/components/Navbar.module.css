@@ -1,14 +1,9 @@
-.header {
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   border-bottom: var(--border);
-}
-
-.header h1 {
-  margin: 0;
-  padding: 0;
 }
 
 .ul {
@@ -26,32 +21,56 @@
   padding: 0.5rem 1rem;
   font-weight: 500;
   border-radius: var(--border-radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.ul > li > button {
-  background-color: inherit;
-  padding: 0.5rem 1rem;
-}
-
-ul svg {
+.ul svg {
   height: 24px;
   width: 24px;
 }
 
 .ul > li > a:hover,
 .ul > li > button:hover {
-  background-color: #f4f4f4;
+  background-color: var(--button-bg-color);
 }
 
-.link {
+.logoLink {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo {
+.logoLink img {
   height: 32px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    z-index: 100;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: var(--border);
+    padding: 0;
+  }
+
+  .logoLink {
+    display: none;
+  }
+
+  .container nav {
+    width: 100%;
+  }
+
+  .ul {
+    justify-content: space-around;
+  }
+
+  .ul > li > a {
+    padding: 1.5rem;
+  }
+
+  .ul > li > a:hover {
+    background-color: unset;
+  }
 }

@@ -34,7 +34,7 @@ const Search = () => {
       </label>
 
       <div className={styles.filters}>
-        <span>Messages entre le</span>
+        <span>Entre le</span>
         <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         <span>et le</span>
         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
