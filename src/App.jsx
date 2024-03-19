@@ -16,11 +16,11 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
+        <Route path="/" element={<Layout isLoggedIn={isLoggedIn} />}>
           <Route index element={<Home isLoggedIn={isLoggedIn} />} />
           <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="profile/:username" element={<Profile />} />
           <Route path="search" element={<Search />} />
           <Route path="forum/:name" element={<Forum />} />
