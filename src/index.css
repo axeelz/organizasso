@@ -11,13 +11,15 @@
   --text-color: #333;
   --text-muted: #71717a;
   --border-radius: 12px;
-  --border: 1px solid #eaeaea;
+  --border-color: #eaeaea;
+  --border: 1px solid var(--border-color);
   --shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
   --primary-bg-color: #01696c;
   --primary-text-color: #fff;
   --secondary-bg-color: #fe9693;
   --secondary-text-color: #333;
+  --button-bg-color: #f4f4f4;
 
   --header-height: 71px;
 }
@@ -59,8 +61,30 @@ button {
   font-weight: 500;
   border: none;
   transition: transform 0.2s ease;
+  background-color: var(--button-bg-color);
+}
+
+button:has(svg),
+a:has(svg) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 button:active {
   transform: scale(0.98);
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
 }

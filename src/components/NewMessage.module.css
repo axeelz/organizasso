@@ -13,7 +13,4 @@
 .send {
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
