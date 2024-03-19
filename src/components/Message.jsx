@@ -7,6 +7,7 @@ import { useState } from "react";
 import NewMessage from "./NewMessage";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { users } from "../data/sample";
+import { IoTrashBin } from "react-icons/io5";
 
 const Message = ({ message }) => {
   const [isReplying, setIsReplying] = useState(false);
@@ -36,6 +37,12 @@ const Message = ({ message }) => {
           <button>
             <RiVerifiedBadgeFill />
             <span>Rendre admin.</span>
+          </button>
+        )}
+        {!user.isAdmin && (
+          <button>
+            <IoTrashBin />
+            <span>Bannir</span>
           </button>
         )}
       </div>

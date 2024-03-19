@@ -92,6 +92,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #cc0000;
+  color: var(--color-danger);
   font-size: 0.875rem;
 }

@@ -1,16 +1,54 @@
 .usersList {
   display: flex;
-  flex-direction: column;
-  align-items: start;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .user {
+  border-radius: var(--border-radius);
+  border: var(--border);
+  padding: 1rem;
+}
+
+.info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.admin {
+.info a {
+  color: inherit;
+}
+
+.username {
   font-weight: 600;
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.unverified {
+  color: var(--color-danger);
+  font-weight: 500;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.danger {
+  background-color: var(--color-danger);
+  color: white;
+}
+
+.success {
+  background-color: var(--color-success);
+  color: black;
+}
+
+.promote {
+  background-color: var(--primary-bg-color);
+  color: white;
 }

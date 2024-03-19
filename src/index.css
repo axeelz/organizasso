@@ -21,6 +21,9 @@
   --secondary-text-color: #333;
   --button-bg-color: #f4f4f4;
 
+  --color-danger: #cc0000;
+  --color-success: #22c55e;
+
   --header-height: 72px;
 }
 
