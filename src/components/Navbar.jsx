@@ -18,12 +18,6 @@ const Navbar = ({ isLoggedIn }) => {
               <IoHome />
             </Link>
           </li>
-          <li>
-            <Link to="search">
-              <IoSearch />
-              <span className="desktop-only">Recherche</span>
-            </Link>
-          </li>
           {(!isLoggedIn && (
             <li>
               <Link to="login">
@@ -33,6 +27,12 @@ const Navbar = ({ isLoggedIn }) => {
             </li>
           )) || (
             <>
+              <li>
+                <Link to="search">
+                  <IoSearch />
+                  <span className="desktop-only">Recherche</span>
+                </Link>
+              </li>
               {loggedInUser.isAdmin && (
                 <li>
                   <Link to="admin">
