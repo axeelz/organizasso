@@ -33,6 +33,8 @@ export const users = [
   {
     id: 1,
     username: "johndoe",
+    firstName: "John",
+    lastName: "Doe",
     isAdmin: false,
     createdAt: "2024-03-02T12:00:00",
     isVerified: true,
@@ -40,6 +42,8 @@ export const users = [
   {
     id: 2,
     username: "janedoe",
+    firstName: "Jane",
+    lastName: "Doe",
     isAdmin: true,
     createdAt: "2024-03-03T20:12:00",
     isVerified: true,
@@ -47,6 +51,8 @@ export const users = [
   {
     id: 3,
     username: "loggeduser",
+    firstName: "Logged",
+    lastName: "User",
     isAdmin: true,
     createdAt: "2024-03-03T20:12:00",
     isVerified: true,
@@ -54,6 +60,8 @@ export const users = [
   {
     id: 4,
     username: "unverifieduser",
+    firstName: "Unverified",
+    lastName: "User",
     isAdmin: false,
     createdAt: "2024-03-03T20:12:00",
     isVerified: false,

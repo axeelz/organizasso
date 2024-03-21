@@ -95,3 +95,14 @@
   color: var(--color-danger);
   font-size: 0.875rem;
 }
+
+.nameContainer {
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.nameContainer input {
+  width: 50%;
+}

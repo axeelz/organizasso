@@ -17,6 +17,7 @@ const Profile = ({ setIsLoggedIn }) => {
     navigate("/");
   };
   const user = username ? users.find((user) => user.username === username) : loggedInUser;
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <main>
@@ -30,6 +31,7 @@ const Profile = ({ setIsLoggedIn }) => {
       </div>
 
       <h1>@{user.username}</h1>
+      <h2>{fullName}</h2>
 
       <section className={styles.infos}>
         <span className={styles.status}>

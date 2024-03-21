@@ -4,10 +4,16 @@ import styles from "./Registration.module.css";
 import { IoWarning } from "react-icons/io5";
 
 const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatedPassword, setRepeatedPassword] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    repeatedPassword: "",
+  });
   const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
     username: "",
     password: "",
     repeatedPassword: "",
@@ -16,7 +22,7 @@ const SignUp = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (password !== repeatedPassword) {
+    if (userDetails.password !== userDetails.repeatedPassword) {
       setErrors({ ...errors, repeatedPassword: "Les mots de passe ne correspondent pas" });
       return;
     }
@@ -33,26 +39,42 @@ const SignUp = () => {
           <p>pour accéder au forum</p>
         </div>
         <form onSubmit={handleSignup} className={styles.form}>
+          <div className={styles.nameContainer}>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="Prénom"
+              value={userDetails.firstName}
+              onChange={(e) => setUserDetails({ ...userDetails, firstName: e.target.value })}
+            />
+            <input
+              type="text"
+              id="lastName"
+              placeholder="Nom"
+              value={userDetails.lastName}
+              onChange={(e) => setUserDetails({ ...userDetails, lastName: e.target.value })}
+            />
+          </div>
           <input
             type="text"
             id="username"
             placeholder="Nom d'utilisateur"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={userDetails.username}
+            onChange={(e) => setUserDetails({ ...userDetails, username: e.target.value })}
           />
           <input
             type="password"
             id="password"
             placeholder="Mot de passe"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={userDetails.password}
+            onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
           />
           <input
             type="password"
             id="repeatedPassword"
             placeholder="Répéter le mot de passe"
-            value={repeatedPassword}
-            onChange={(e) => setRepeatedPassword(e.target.value)}
+            value={userDetails.repeatedPassword}
+            onChange={(e) => setUserDetails({ ...userDetails, repeatedPassword: e.target.value })}
             onFocus={() => setErrors({ ...errors, repeatedPassword: "" })}
           />
           {errors.repeatedPassword && (
