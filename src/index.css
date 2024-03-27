@@ -17,8 +17,8 @@
 
   --primary-bg-color: #01696c;
   --primary-text-color: #fff;
-  --secondary-bg-color: #fe9693;
-  --secondary-text-color: #333;
+  --secondary-bg-color: #617c7d;
+  --secondary-text-color: #fff;
   --button-bg-color: #f4f4f4;
 
   --color-danger: #cc0000;
@@ -39,14 +39,10 @@ body {
 }
 
 main {
-  min-height: calc(100vh - var(--header-height));
-}
-
-main,
-.spacing {
   padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
+  min-height: calc(100vh - var(--header-height));
 }
 
 input,
