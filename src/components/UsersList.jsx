@@ -25,6 +25,9 @@ const UsersList = ({ verified, unverified }) => {
         <div key={user.id} className={styles.user}>
           <div className={styles.info}>
             <Link to={`/profile/${user.username}`}>
+              <span className={styles.fullName}>
+                {user.firstName} {user.lastName}
+              </span>
               <span className={styles.username}>@{user.username}</span>
             </Link>
             {!user.isVerified && <span className={styles.unverified}>Non vérifié</span>}
