@@ -24,10 +24,12 @@ const Profile = ({ setIsLoggedIn }) => {
       <div className={styles.actions}>
         <BackButton />
 
-        <button onClick={logout}>
-          <IoLogOut />
-          <span>Déconnexion</span>
-        </button>
+        {user === loggedInUser && (
+          <button onClick={logout}>
+            <IoLogOut />
+            <span>Déconnexion</span>
+          </button>
+        )}
       </div>
 
       <h1>@{user.username}</h1>
