@@ -1,0 +1,19 @@
+{
+  "name": "organizasso",
+  "version": "1.0.0",
+  "description": "Mon app touitère côté serveur",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node src/index.js",
+    "start": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^6.5.0",
+    "nodemon": "^3.1.0",
+    "path": "^0.12.7"
+  }
+}
