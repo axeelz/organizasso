@@ -19,6 +19,10 @@ app.use(
   })
 );
 
+// CORS
+const cors = require("cors");
+app.use(cors());
+
 async function connectToDatabase() {
   const uri = "mongodb://localhost";
   const client = new MongoClient(uri);

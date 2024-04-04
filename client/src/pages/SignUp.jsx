@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
 import { IoWarning } from "react-icons/io5";
+import axios from "axios";
 
 const SignUp = () => {
   const [userDetails, setUserDetails] = useState({
@@ -11,23 +12,31 @@ const SignUp = () => {
     password: "",
     repeatedPassword: "",
   });
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    password: "",
-    repeatedPassword: "",
-  });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
     if (userDetails.password !== userDetails.repeatedPassword) {
-      setErrors({ ...errors, repeatedPassword: "Les mots de passe ne correspondent pas" });
+      setError("Les mots de passe ne correspondent pas");
       return;
     }
-    setErrors({ ...errors, repeatedPassword: "" });
-    navigate("/login");
+    setError("");
+    axios
+      .post(import.meta.env.VITE_API_URL + "/user/signup", {
+        login: userDetails.username,
+        password: userDetails.password,
+        lastname: userDetails.lastName,
+        firstname: userDetails.firstName,
+      })
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.error(err);
+        const { message } = err.response.data;
+        setError(message);
+      });
   };
 
   return (
@@ -75,12 +84,12 @@ const SignUp = () => {
             placeholder="Répéter le mot de passe"
             value={userDetails.repeatedPassword}
             onChange={(e) => setUserDetails({ ...userDetails, repeatedPassword: e.target.value })}
-            onFocus={() => setErrors({ ...errors, repeatedPassword: "" })}
+            onFocus={() => setError("")}
           />
-          {errors.repeatedPassword && (
+          {error && (
             <span className={styles.error}>
               <IoWarning />
-              {errors.repeatedPassword}
+              {error}
             </span>
           )}
           <button type="submit" className={styles.button}>

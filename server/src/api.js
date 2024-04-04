@@ -20,18 +20,16 @@ function init(db) {
       const { login, password } = req.body;
       // Erreur sur la requête HTTP
       if (!login || !password) {
-        res.status(400).json({
+        return res.status(400).json({
           status: 400,
-          message: "Requête invalide : login et password nécessaires",
+          message: "Le nom d'utilisateur et le mot de passe sont obligatoires",
         });
-        return;
       }
       if (!(await users.exists(login))) {
-        res.status(401).json({
+        return res.status(401).json({
           status: 401,
           message: "Utilisateur inconnu",
         });
-        return;
       }
       let userid = await users.checkpassword(login, password);
       if (userid) {
@@ -55,19 +53,41 @@ function init(db) {
       }
       // Faux login : destruction de la session et erreur
       req.session.destroy((err) => {});
-      res.status(403).json({
+      return res.status(403).json({
         status: 403,
-        message: "login et/ou le mot de passe invalide(s)",
+        message: "Nom d'utilisateur ou mot de passe incorrect",
       });
-      return;
     } catch (e) {
       // Toute autre erreur
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
-        message: "erreur interne",
+        message: "Erreur interne",
         details: (e || "Erreur inconnue").toString(),
       });
     }
+  });
+
+  router.post("/user/signup", async (req, res) => {
+    const { login, password, lastname, firstname } = req.body;
+    if (!login || !password || !lastname || !firstname) {
+      return res.status(400).json({
+        status: 400,
+        message: "Tous les champs sont obligatoires",
+      });
+    }
+    if (await users.exists(login)) {
+      return res.status(409).json({
+        status: 409,
+        message: "Nom d'utilisateur déjà utilisé",
+      });
+    }
+    const bcrypt = require("bcrypt");
+    const workFactor = 8;
+    const hash = await bcrypt.hash(password, workFactor);
+    users
+      .create(login, hash, lastname, firstname)
+      .then((user_id) => res.status(201).json({ id: user_id }))
+      .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
   router
