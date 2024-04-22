@@ -13,9 +13,11 @@ const SignUp = () => {
     repeatedPassword: "",
   });
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleSignup = (e) => {
+    setSubmitting(true);
     e.preventDefault();
     if (userDetails.password !== userDetails.repeatedPassword) {
       setError("Les mots de passe ne correspondent pas");
@@ -29,13 +31,14 @@ const SignUp = () => {
         lastname: userDetails.lastName,
         firstname: userDetails.firstName,
       })
-      .then((res) => {
+      .then(() => {
         navigate("/login");
       })
       .catch((err) => {
         console.error(err);
         const { message } = err.response.data;
         setError(message);
+        setSubmitting(false);
       });
   };
 
@@ -92,8 +95,9 @@ const SignUp = () => {
               {error}
             </span>
           )}
-          <button type="submit" className={styles.button}>
+          <button type="submit" className={styles.button} disabled={submitting}>
             Inscription
+            {submitting && "..."}
           </button>
         </form>
         <p className={styles.redirect}>
