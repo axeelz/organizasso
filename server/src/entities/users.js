@@ -26,23 +26,16 @@ class Users {
   }
 
   get(userid) {
-    return new Promise((resolve, reject) => {
-      const user = {
-        login: "pikachu",
-        password: "1234",
-        lastname: "chu",
-        firstname: "pika",
-      }; // À remplacer par une requête bd
-
-      if (false) {
-        //erreur
-        reject();
+    return new Promise(async (resolve, reject) => {
+      const { ObjectId } = require("mongodb");
+      const objId = new ObjectId(String(userid));
+      const user = await this.db.collection("users").findOne({ _id: objId });
+      if (user) {
+        // On rend "id" aussi accessible (en plus de _id), par simplicité
+        user.id = user._id;
+        resolve(user);
       } else {
-        if (userid == 1) {
-          resolve(user);
-        } else {
-          resolve(null);
-        }
+        reject({ error: { message: "Utilisateur inexistant" } });
       }
     });
   }
