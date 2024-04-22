@@ -71,6 +71,12 @@
   box-shadow: var(--shadow);
 }
 
+.form button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #ccc;
+}
+
 .redirect {
   color: var(--text-muted);
   margin-top: 1rem;
