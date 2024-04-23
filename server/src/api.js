@@ -15,6 +15,7 @@ function init(db) {
 
   const users = new Users.default(db);
 
+  // Connexion
   router.post("/user/login", async (req, res) => {
     try {
       const { login, password } = req.body;
@@ -67,6 +68,7 @@ function init(db) {
     }
   });
 
+  // Inscription
   router.post("/user/signup", async (req, res) => {
     const { login, password, lastname, firstname } = req.body;
     if (!login || !password || !lastname || !firstname) {
@@ -90,6 +92,7 @@ function init(db) {
       .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
+  // Récupérer un utilisateur
   router
     .route("/user/:user_id(\\d+)")
     .get(async (req, res) => {
@@ -103,6 +106,15 @@ function init(db) {
     })
     .delete((req, res, next) => res.send(`delete user ${req.params.user_id}`));
 
+  // Récupérer tous les utilisateurs
+  router.get("/user", (req, res) => {
+    users
+      .getAll()
+      .then((users) => res.status(200).send(users))
+      .catch((err) => res.status(500).send(err));
+  });
+
+  // Mettre à jour un utilisateur
   router.put("/user", (req, res) => {
     const { login, password, lastname, firstname } = req.body;
     if (!login || !password || !lastname || !firstname) {

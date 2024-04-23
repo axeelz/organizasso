@@ -4,6 +4,7 @@ class Users {
     // suite plus tard avec la BD
   }
 
+  // Crée un nouvel utilisateur
   create(login, password, lastname, firstname) {
     return new Promise(async (resolve, reject) => {
       const user = {
@@ -25,6 +26,7 @@ class Users {
     });
   }
 
+  // Renvoie les informations d'un utilisateur
   get(userid) {
     return new Promise(async (resolve, reject) => {
       const { ObjectId } = require("mongodb");
@@ -40,6 +42,17 @@ class Users {
     });
   }
 
+  getAll() {
+    return new Promise(async (resolve, reject) => {
+      const users = await this.db.collection("users").find().toArray();
+      users.forEach((user) => {
+        user.id = user._id;
+      });
+      resolve(users);
+    });
+  }
+
+  // Vérifie si un utilisateur existe déjà
   async exists(login) {
     return new Promise(async (resolve, reject) => {
       const matchingUser = await this.db.collection("users").findOne({
@@ -53,8 +66,8 @@ class Users {
     });
   }
 
+  // Effectue une requête bd pour vérifier le mot de passe et retourne l'id de l'utilisateur
   checkpassword(login, password) {
-    // Effectue une requête bd pour vérifier le mot de passe et retourne l'id de l'utilisateur
     return new Promise(async (resolve, reject) => {
       const matchingUser = await this.db.collection("users").findOne({
         username: login,
