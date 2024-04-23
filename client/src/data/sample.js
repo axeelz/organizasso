@@ -67,5 +67,3 @@ export const users = [
     isVerified: false,
   },
 ];
-
-export const loggedInUser = users[2];

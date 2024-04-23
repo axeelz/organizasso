@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { IoHome, IoSearch, IoPersonCircle, IoShieldCheckmarkSharp, IoLogIn } from "react-icons/io5";
 import logo from "../assets/logo.png";
-import { loggedInUser } from "../data/sample";
+import { useContext } from "react";
+import { UserContext } from "../context/user";
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = () => {
+  const { isLoggedIn, loggedInUser, loading } = useContext(UserContext);
+
   return (
     <header className={styles.container}>
       <Link to="/" className={styles.logoLink}>
@@ -18,41 +21,53 @@ const Navbar = ({ isLoggedIn }) => {
               <IoHome />
             </Link>
           </li>
-          {(!isLoggedIn && (
-            <li>
-              <Link to="login">
-                <IoLogIn />
-                <span className="desktop-only">Connexion</span>
-              </Link>
-            </li>
-          )) || (
-            <>
-              <li>
-                <Link to="search">
-                  <IoSearch />
-                  <span className="desktop-only">Recherche</span>
-                </Link>
-              </li>
-              {loggedInUser.isAdmin && (
-                <li>
-                  <Link to="admin">
-                    <IoShieldCheckmarkSharp />
-                    <span className="desktop-only">Admin</span>
-                  </Link>
-                </li>
-              )}
-              <li>
-                <Link to="profile">
-                  <IoPersonCircle />
-                  <span className="desktop-only">Profil</span>
-                </Link>
-              </li>
-            </>
-          )}
+          <NavbarLinks isLoggedIn={isLoggedIn} loggedInUser={loggedInUser} loading={loading} />
         </ul>
       </nav>
     </header>
   );
+};
+
+const NavbarLinks = ({ isLoggedIn, loggedInUser, loading }) => {
+  if (loading) {
+    return null;
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <li>
+        <Link to="login">
+          <IoLogIn />
+          <span className="desktop-only">Connexion</span>
+        </Link>
+      </li>
+    );
+  } else {
+    return (
+      <>
+        <li>
+          <Link to="search">
+            <IoSearch />
+            <span className="desktop-only">Recherche</span>
+          </Link>
+        </li>
+        {loggedInUser.isAdmin && (
+          <li>
+            <Link to="admin">
+              <IoShieldCheckmarkSharp />
+              <span className="desktop-only">Admin</span>
+            </Link>
+          </li>
+        )}
+        <li>
+          <Link to="profile">
+            <IoPersonCircle />
+            <span className="desktop-only">Profil</span>
+          </Link>
+        </li>
+      </>
+    );
+  }
 };
 
 export default Navbar;

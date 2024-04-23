@@ -4,27 +4,33 @@ import styles from "./Registration.module.css";
 import axios from "axios";
 import { IoWarning } from "react-icons/io5";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+    setSubmitting(true);
     e.preventDefault();
     setError("");
     axios
-      .post(import.meta.env.VITE_API_URL + "/user/login", {
-        login: username,
-        password: password,
-      })
-      .then((res) => {
-        setIsLoggedIn(true);
-        navigate("/");
+      .post(
+        import.meta.env.VITE_API_URL + "/user/login",
+        {
+          login: username,
+          password: password,
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        navigate(0);
       })
       .catch((err) => {
         const { message } = err.response.data;
         setError(message);
+        setSubmitting(false);
       });
   };
 
@@ -59,8 +65,9 @@ const Login = ({ setIsLoggedIn }) => {
               {error}
             </span>
           )}
-          <button type="submit" className={styles.button}>
+          <button type="submit" className={styles.button} disabled={submitting}>
             Connexion
+            {submitting && "..."}
           </button>
         </form>
         <p className={styles.redirect}>

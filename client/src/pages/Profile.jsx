@@ -1,22 +1,44 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MessagesList from "../components/MessagesList";
 import { IoLogOut } from "react-icons/io5";
 import styles from "./Profile.module.css";
-import { loggedInUser, messages, users } from "../data/sample";
+import { messages, users } from "../data/sample";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import BackButton from "../components/BackButton";
+import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../context/user";
 
-const Profile = ({ setIsLoggedIn }) => {
+const Profile = () => {
   const { username } = useParams();
   const navigate = useNavigate();
 
   const logout = () => {
-    setIsLoggedIn(false);
-    navigate("/");
+    axios
+      .get(import.meta.env.VITE_API_URL + "/user/logout", { withCredentials: true })
+      .then(() => {
+        console.log("Logged out");
+        navigate(0);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
+  const { loggedInUser } = useContext(UserContext);
+
   const user = username ? users.find((user) => user.username === username) : loggedInUser;
+
+  if (!user) {
+    return (
+      <main>
+        <h1>Profil inexistant</h1>
+        <p>Cet utilisateur n'existe pas</p>
+      </main>
+    );
+  }
+
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
