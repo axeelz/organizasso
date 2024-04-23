@@ -12,6 +12,7 @@ import Forum from "./pages/Forum.jsx";
 import axios from "axios";
 import { UserContext } from "./context/user.js";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import { Toaster } from "sonner";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -72,6 +73,8 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+
+      <Toaster richColors />
     </UserContext.Provider>
   );
 };

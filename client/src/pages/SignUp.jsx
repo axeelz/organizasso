@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
 import { IoWarning } from "react-icons/io5";
 import axios from "axios";
+import { toast } from "sonner";
 
 const SignUp = () => {
   const [userDetails, setUserDetails] = useState({
@@ -32,6 +33,7 @@ const SignUp = () => {
         firstname: userDetails.firstName,
       })
       .then(() => {
+        toast.success("Inscription réussie !");
         navigate("/login");
       })
       .catch((err) => {

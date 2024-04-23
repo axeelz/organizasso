@@ -1,5 +1,6 @@
 const express = require("express");
 const Users = require("./entities/users.js");
+const Messages = require("./entities/messages.js");
 
 function init(db) {
   const router = express.Router();
@@ -150,6 +151,23 @@ function init(db) {
         return res.status(200).json({ message: "Déconnecté" });
       }
     });
+  });
+
+  // Créer un message
+  const messages = new Messages.default(db);
+
+  router.post("/message", async (req, res) => {
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté" });
+    }
+    const { content, forum } = req.body;
+    if (!content || !forum) {
+      return res.status(400).json({ status: 400, message: "Champs manquants" });
+    }
+    messages
+      .create(req.session.userid, content, forum)
+      .then((message_id) => res.status(201).json({ id: message_id }))
+      .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
   return router;
