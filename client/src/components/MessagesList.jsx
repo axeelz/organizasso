@@ -5,12 +5,7 @@ import { users } from "../data/sample";
 const MessagesList = ({ messages, username }) => {
   if (username) {
     const user = users.find((user) => user.username === username);
-
-    if (!user) {
-      return null;
-    }
-
-    messages = messages.filter((message) => message.userId === user.id);
+    messages = messages.filter((message) => message.userId === user?.id);
   }
 
   if (messages.length === 0) {
