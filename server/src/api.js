@@ -153,9 +153,9 @@ function init(db) {
     });
   });
 
-  // Créer un message
   const messages = new Messages.default(db);
 
+  // Créer un message
   router.post("/message", async (req, res) => {
     if (!req.session.userid) {
       return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
@@ -168,6 +168,14 @@ function init(db) {
       .create(req.session.userid, content, forum)
       .then((message_id) => res.status(201).json({ id: message_id }))
       .catch((err) => res.status(500).json({ status: 500, message: err }));
+  });
+
+  // Récupérer les messages d'un forum
+  router.get("/message/:forum", (req, res) => {
+    messages
+      .getByForum(req.params.forum)
+      .then((messages) => res.status(200).send(messages))
+      .catch((err) => res.status(500).send(err));
   });
 
   return router;
