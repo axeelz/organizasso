@@ -170,6 +170,28 @@ function init(db) {
       .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
+  // Récupérer tous les messages si l'utilisateur est Admin, sinon que ceux du forum ouvert
+  router.get("/message", async (req, res) => {
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    const user = await users.get(req.session.userid);
+    if (!user) {
+      return res.status(401).json({ status: 401, message: "Utilisateur inconnu" });
+    }
+    if (user.isAdmin) {
+      messages
+        .getAll()
+        .then((messages) => res.status(200).send(messages))
+        .catch((err) => res.status(500).send(err));
+    } else {
+      messages
+        .getByForum("ouvert")
+        .then((messages) => res.status(200).send(messages))
+        .catch((err) => res.status(500).send(err));
+    }
+  });
+
   // Récupérer les messages d'un forum
   router.get("/message/:forum", (req, res) => {
     messages
