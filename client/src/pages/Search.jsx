@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Search.module.css";
-import { messages } from "../data/sample";
 import MessagesList from "../components/MessagesList";
 import { IoSearchOutline } from "react-icons/io5";
+import axios from "axios";
 
 const Search = () => {
   const [query, setQuery] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMessages = () => {
+      axios
+        .get(import.meta.env.VITE_API_URL + "/message", { withCredentials: true })
+        .then((res) => setMessages(res.data))
+        .catch((err) => console.error(err))
+        .finally(() => setLoading(false));
+    };
+
+    fetchMessages();
+  }, []);
 
   const results = messages.filter((message) => {
     const date = new Date(message.date);
@@ -42,7 +56,7 @@ const Search = () => {
 
       <hr className={styles.separator} />
 
-      <MessagesList messages={results} />
+      <MessagesList messages={results} loading={loading} showForumName />
     </main>
   );
 };

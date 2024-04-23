@@ -6,16 +6,16 @@ import { BsFillReplyFill, BsFillTrashFill } from "react-icons/bs";
 import { useState } from "react";
 import NewMessage from "./NewMessage";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { users } from "../data/sample";
 import { IoTrashBin } from "react-icons/io5";
+import { displayForumName } from "../utils";
 
-const Message = ({ message }) => {
+const Message = ({ message, showForumName }) => {
   const [isReplying, setIsReplying] = useState(false);
 
-  const user = users.find((user) => user.id === message.userId);
+  const user = message.user;
 
   return (
-    <div key={message.id} className={styles.message}>
+    <div className={styles.message}>
       <div className={styles.messageHeader}>
         <Link to={`/profile/${user.username}`} className={styles.username}>
           @{user.username}
@@ -23,6 +23,7 @@ const Message = ({ message }) => {
         </Link>
         <span>· {formatDistance(new Date(message.date), new Date(), { addSuffix: true, locale: fr })}</span>
       </div>
+      {showForumName && <span className={styles.forumName}>Forum {displayForumName(message.forum)}</span>}
       <p>{message.content}</p>
       <div className={styles.messageFooter}>
         <button onClick={() => setIsReplying(!isReplying)}>

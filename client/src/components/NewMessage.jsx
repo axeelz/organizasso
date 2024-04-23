@@ -4,7 +4,7 @@ import { IoIosSend } from "react-icons/io";
 import axios from "axios";
 import { toast } from "sonner";
 
-const NewMessage = ({ forumName, isReply }) => {
+const NewMessage = ({ forumName, fetchMessages, isReply }) => {
   const [message, setMessage] = useState("");
 
   const handleSend = () => {
@@ -20,6 +20,7 @@ const NewMessage = ({ forumName, isReply }) => {
       .then(() => {
         setMessage("");
         toast.success("Message envoyé !");
+        if (fetchMessages) fetchMessages();
       })
       .catch((err) => {
         const { message } = err.response.data;

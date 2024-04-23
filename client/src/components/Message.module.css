@@ -24,11 +24,20 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .messageHeader span {
   font-size: 0.8rem;
   color: var(--text-muted);
+}
+
+.forumName {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .messageFooter {
