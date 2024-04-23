@@ -42,3 +42,11 @@
   color: var(--secondary-text-color);
   background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.3)), var(--secondary-bg-color);
 }
+
+.list a:has([data-forum="no-access"]) {
+  cursor: not-allowed;
+}
+.list li[data-forum="no-access"] {
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.1);
+}
