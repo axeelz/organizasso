@@ -33,8 +33,6 @@ class Users {
       const objId = new ObjectId(String(userid));
       const user = await this.db.collection("users").findOne({ _id: objId });
       if (user) {
-        // On rend "id" aussi accessible (en plus de _id), par simplicité
-        user.id = user._id;
         resolve(user);
       } else {
         reject({ error: { message: "Utilisateur inexistant" } });
@@ -45,9 +43,6 @@ class Users {
   getAll() {
     return new Promise(async (resolve, reject) => {
       const users = await this.db.collection("users").find().toArray();
-      users.forEach((user) => {
-        user.id = user._id;
-      });
       resolve(users);
     });
   }
