@@ -10,18 +10,22 @@ express = require("express");
 const app = express();
 // api_1 = require("./api.js");
 const session = require("express-session");
+app.set("trust proxy", 1);
 
 app.use(
   session({
     secret: "technoweb rocks",
     resave: true,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    },
   })
 );
 
 // CORS
 const cors = require("cors");
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 async function connectToDatabase() {
   const uri = "mongodb://localhost";
