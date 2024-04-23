@@ -1,7 +1,7 @@
-# Organiz'Asso Front-end
+# Organiz'Asso Back-end
 
 ## 👉 Pour lancer l'application
 
 `$ npm install`
 
-`$ npm run dev`
+`$ npm start`
