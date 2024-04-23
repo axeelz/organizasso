@@ -115,6 +115,31 @@ function init(db) {
     }
   });
 
+  // Récupérer les informations de l'utilisateur connecté
+  router.get("/user/session", async (req, res) => {
+    if (req.session.userid) {
+      users
+        .get(req.session.userid)
+        .then((user) => res.status(200).json({ user }))
+        .catch((err) => res.status(500).send(err));
+    } else {
+      return res.status(401).json({ status: 401, message: "Non connecté" });
+    }
+  });
+
+  // Déconnexion
+  router.get("/user/logout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ status: 500, message: "Erreur interne" });
+      } else {
+        // Supprimer le cookie côté client
+        res.clearCookie("connect.sid");
+        return res.status(200).json({ message: "Déconnecté" });
+      }
+    });
+  });
+
   return router;
 }
 
