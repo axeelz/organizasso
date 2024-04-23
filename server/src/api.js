@@ -158,11 +158,11 @@ function init(db) {
 
   router.post("/message", async (req, res) => {
     if (!req.session.userid) {
-      return res.status(401).json({ status: 401, message: "Non connecté" });
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
     }
     const { content, forum } = req.body;
     if (!content || !forum) {
-      return res.status(400).json({ status: 400, message: "Champs manquants" });
+      return res.status(400).json({ status: 400, message: "Veuillez entrer un message" });
     }
     messages
       .create(req.session.userid, content, forum)

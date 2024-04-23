@@ -22,7 +22,8 @@ const NewMessage = ({ forumName, isReply }) => {
         toast.success("Message envoyé !");
       })
       .catch((err) => {
-        console.error(err);
+        const { message } = err.response.data;
+        toast.error(message);
       });
   };
 
