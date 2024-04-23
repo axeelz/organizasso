@@ -16,6 +16,14 @@
 
 `$ npm start`
 
+## Prérequis
+
+- Node.js
+
+- MongoDB installé en local tournant sur localhost:27017
+
+- Une base de données nommée `organizasso` créée dans MongoDB contenant les collections `users` et `messages`
+
 ## Technologies devant être utilisées
 
 - **Front-end :** React.js en JavaScript, pure CSS, pas de librairies / frameworks CSS, pas de Redux
