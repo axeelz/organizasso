@@ -43,7 +43,9 @@ class Messages {
                 as: "user",
               },
             },
+            // On récupère un objet user au lieu d'un tableau
             { $unwind: "$user" },
+            // On ne renvoie pas le mot de passe de l'utilisateur
             {
               $project: {
                 user: {
@@ -51,6 +53,8 @@ class Messages {
                 },
               },
             },
+            // Les plus récents en premier
+            { $sort: { date: -1 } },
           ])
           .toArray();
         resolve(messages);
