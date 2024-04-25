@@ -30,6 +30,8 @@ const Login = () => {
       .catch((err) => {
         const { message } = err.response?.data || err;
         setError(message);
+      })
+      .finally(() => {
         setSubmitting(false);
       });
   };

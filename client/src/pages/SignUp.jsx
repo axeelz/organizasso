@@ -40,6 +40,8 @@ const SignUp = () => {
         console.error(err);
         const { message } = err.response.data;
         setError(message);
+      })
+      .finally(() => {
         setSubmitting(false);
       });
   };
