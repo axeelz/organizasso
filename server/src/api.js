@@ -33,6 +33,12 @@ function init(db) {
           message: "Utilisateur inconnu",
         });
       }
+      if (!(await users.isVerified(login))) {
+        return res.status(403).json({
+          status: 403,
+          message: "Votre inscription n'a pas encore été validée",
+        });
+      }
       let userid = await users.checkpassword(login, password);
       if (userid) {
         // Avec middleware express-session
@@ -151,6 +157,25 @@ function init(db) {
         return res.status(200).json({ message: "Déconnecté" });
       }
     });
+  });
+
+  // Vérifier un utilisateur (seulement si l'utilisateur connecté est isAdmin)
+  router.put("/user/verify", async (req, res) => {
+    const userToVerify = req.body.userId;
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    const user = await users.get(req.session.userid);
+    if (!user) {
+      return res.status(401).json({ status: 401, message: "Utilisateur inconnu" });
+    }
+    if (!user.isAdmin) {
+      return res.status(403).json({ status: 403, message: "Non autorisé" });
+    }
+    users
+      .verify(userToVerify)
+      .then(() => res.status(200).json({ message: "Utilisateur vérifié" }))
+      .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
   const messages = new Messages.default(db);

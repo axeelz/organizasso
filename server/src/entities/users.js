@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 class Users {
   constructor(db) {
     this.db = db;
@@ -29,7 +31,6 @@ class Users {
   // Renvoie les informations d'un utilisateur par son id
   get(userid) {
     return new Promise(async (resolve, reject) => {
-      const { ObjectId } = require("mongodb");
       const objId = new ObjectId(String(userid));
       const user = await this.db.collection("users").findOne({ _id: objId }, { projection: { password: 0 } });
       if (user) {
@@ -82,6 +83,29 @@ class Users {
       } else {
         resolve(null);
       }
+    });
+  }
+
+  // Vérifie si un utilisateur est vérifié
+  async isVerified(login) {
+    return new Promise(async (resolve, reject) => {
+      const matchingUser = await this.db.collection("users").findOne({
+        username: login,
+      });
+      if (matchingUser) {
+        resolve(matchingUser.isVerified);
+      } else {
+        resolve(false);
+      }
+    });
+  }
+
+  // Met à jour le statut de vérification d'un utilisateur
+  async verify(userId) {
+    return new Promise(async (resolve, reject) => {
+      const objId = new ObjectId(String(userId));
+      await this.db.collection("users").updateOne({ _id: objId }, { $set: { isVerified: true } });
+      resolve();
     });
   }
 }

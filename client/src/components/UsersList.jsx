@@ -2,21 +2,9 @@ import styles from "./UsersList.module.css";
 import { Link } from "react-router-dom";
 import { IoCheckmarkCircle, IoTrashBin } from "react-icons/io5";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { verifyUser } from "../functions/admins";
 
-const UsersList = ({ verified, unverified }) => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(import.meta.env.VITE_API_URL + "/user", { withCredentials: true })
-      .then((res) => setUsers(res.data))
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
-
+const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
   if (verified && unverified) {
     throw new Error("Vous ne pouvez pas afficher les utilisateurs vérifiés et non vérifiés en même temps");
   }
@@ -53,11 +41,11 @@ const UsersList = ({ verified, unverified }) => {
           <div className={styles.actions}>
             {!user.isAdmin && (
               <button className={styles.danger}>
-                <IoTrashBin /> {user.isVerified ? "Bannir" : "Refuser"}
+                <IoTrashBin /> Supprimer
               </button>
             )}
             {!user.isVerified && (
-              <button className={styles.success}>
+              <button className={styles.success} onClick={() => verifyUser(user._id).then(fetchUsers)}>
                 <IoCheckmarkCircle /> Vérifier
               </button>
             )}
