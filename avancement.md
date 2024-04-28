@@ -65,16 +65,16 @@
 ### Back-end
 
 - [x] Connexion à la base de données MongoDB
-- [x] Connexion d'un utilisateur et création de session (après validation de l'inscription par un admin)
-- [x] Inscription d'un utilisateur (avec hashage du mot de passe)
+- [x] Connexion d'un utilisateur et création de session **(après validation de l'inscription par un admin)**
+- [x] Inscription d'un utilisateur **(avec hashage du mot de passe)**
 - [x] Récupérer les informations d'un utilisateur
 - [x] Récupérer la liste de tous les utilisateurs
 - [x] Récupérer les informations sur l'utilisateur dont la session est active (connecté)
 - [x] Déconnexion de l'utilisateur
-- [x] Passer un utilisateur au statut vérifié (seul un admin peut le faire)
+- [x] Passer un utilisateur au statut vérifié **(seul un admin peut le faire)**
 
 - [x] Création d'un message
-- [x] Récupérer la liste de tous les messages (du forum ouvert et fermé si l'utilisateur est admin)
+- [x] Récupérer la liste de tous les messages **(du forum ouvert et fermé si l'utilisateur est admin)**
 - [x] Récupérer la liste des messages d'un forum en particulier
 
 ### Autres
