@@ -28,6 +28,7 @@ const Login = () => {
         navigate(0);
       })
       .catch((err) => {
+        console.error(err);
         const { message } = err.response?.data || err;
         setError(message);
       })
