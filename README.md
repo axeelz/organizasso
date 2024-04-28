@@ -1,10 +1,12 @@
 # Organiz'Asso
 
-![image](https://raw.githubusercontent.com/axeelz/organizasso/main/client/src/assets/logo.png?token=GHSAT0AAAAAACFKPTFJ4UNY6UQOP2BXXUPIZROMRDQ)
+[![logo d'Organiz'Asso](https://i.postimg.cc/qBCk5yGJ/logo.png)](https://postimg.cc/WtTLDDKC)
 
 ## 👉 Pour lancer le front-end
 
 `$ cd client`
+
+`$ cp .env.example .env` (en modifiant éventuellement les variables d'environnement)
 
 `$ npm install`
 
@@ -23,6 +25,7 @@
 - Node.js
 - MongoDB installé en local tournant sur localhost:27017
 - Une base de données nommée `organizasso` créée dans MongoDB contenant les collections `users` et `messages`
+- Un fichier `.env` dans le dossier `client` contenant les variables d'environnement définies dans le fichier `.env.example`
 
 ## Contraintes techniques
 

@@ -1,6 +1,6 @@
 # Avancement du projet au 29/04/2024
 
-![image](https://raw.githubusercontent.com/axeelz/organizasso/main/client/src/assets/logo.png?token=GHSAT0AAAAAACFKPTFJ4UNY6UQOP2BXXUPIZROMRDQ)
+[![logo d'Organiz'Asso](https://i.postimg.cc/qBCk5yGJ/logo.png)](https://postimg.cc/WtTLDDKC)
 
 ## Cahier des charges
 

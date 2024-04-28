@@ -21,6 +21,7 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isEnvSet()) return;
     console.log("Checking auth status...");
     axios
       .get(import.meta.env.VITE_API_URL + "/user/session", { withCredentials: true })
@@ -50,6 +51,21 @@ const App = () => {
     if (loading) return <LoadingSpinner />;
     return !isLoggedIn ? <Navigate to="/login" /> : <Outlet />;
   };
+
+  const isEnvSet = () => {
+    return import.meta.env.VITE_API_URL !== undefined;
+  };
+
+  if (!isEnvSet())
+    return (
+      <main>
+        <h1>Erreur de configuration</h1>
+        <p>
+          L'application nécessite des variables d'environnement manquantes. Consultez le fichier <code>README.md</code>{" "}
+          pour plus d'informations.
+        </p>
+      </main>
+    );
 
   return (
     <UserContext.Provider value={{ isLoggedIn, loggedInUser, loading }}>
