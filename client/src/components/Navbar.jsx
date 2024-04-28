@@ -29,7 +29,7 @@ const Navbar = () => {
 };
 
 const NavbarLinks = ({ isLoggedIn, loggedInUser, loading }) => {
-  if (loading || !loggedInUser) {
+  if (loading) {
     return null;
   }
 
