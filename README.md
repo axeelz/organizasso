@@ -1,5 +1,7 @@
 # Organiz'Asso
 
+![image](https://raw.githubusercontent.com/axeelz/organizasso/main/client/src/assets/logo.png?token=GHSAT0AAAAAACFKPTFJ4UNY6UQOP2BXXUPIZROMRDQ)
+
 ## 👉 Pour lancer le front-end
 
 `$ cd client`
@@ -24,9 +26,10 @@
 
 ## Contraintes techniques
 
-- **Front-end :** React.js en JavaScript, pure CSS, pas de librairies / frameworks CSS, pas de Redux
+- **Front-end :** React.js en JavaScript avec **axios** pour les requêtes, pure CSS, pas de librairies / frameworks CSS, pas de Redux
 - **Back-end :** Node.js, Express.js
 - **Base de données :** MongoDB, pas de Mongoose
+- **Outils :** Postman pour tester les requêtes
 
 ## Cahier des charges
 
