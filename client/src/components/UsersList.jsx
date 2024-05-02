@@ -5,6 +5,7 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { verifyUser } from "../functions/admins";
 import { useContext } from "react";
 import { UserContext } from "../context/user";
+import { toast } from "sonner";
 
 const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
   const { loggedInUser } = useContext(UserContext);
@@ -50,7 +51,19 @@ const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
               </button>
             )}
             {!user.isVerified && (
-              <button className={styles.success} onClick={() => verifyUser(user._id).then(fetchUsers)}>
+              <button
+                className={styles.success}
+                onClick={() =>
+                  verifyUser(user._id)
+                    .then(() => {
+                      fetchUsers();
+                      toast.success("Utilisateur vérifié !");
+                    })
+                    .catch((err) => {
+                      const { message } = err.response?.data || err;
+                      toast.error(message);
+                    })
+                }>
                 <IoCheckmarkCircle /> Vérifier
               </button>
             )}
