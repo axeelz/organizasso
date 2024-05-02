@@ -60,6 +60,7 @@
 
 - [x] Les pages Login et SignUp sont accessibles **uniquement si l'utilisateur n'est pas connecté**
 - [x] Les pages Profil, Recherche, Forum et Admin sont accessibles **uniquement si l'utilisateur est connecté**
+- [x] La page Admin est accessible **uniquement si l'utilisateur est admin**
 - [x] Une page inexistante ou accéder à la page profil d'un utilisateur inexistant affichent une page 404
 
 ### Back-end

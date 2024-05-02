@@ -52,6 +52,11 @@ const App = () => {
     return !isLoggedIn ? <Navigate to="/login" /> : <Outlet />;
   };
 
+  const AdminOnlyRoute = () => {
+    if (loading) return <LoadingSpinner />;
+    return !loggedInUser.isAdmin ? <Navigate to="/profile" /> : <Outlet />;
+  };
+
   const isEnvSet = () => {
     return import.meta.env.VITE_API_URL !== undefined;
   };
@@ -83,7 +88,10 @@ const App = () => {
             <Route path="profile/:username" element={<Profile />} />
             <Route path="search" element={<Search />} />
             <Route path="forum/:name" element={<Forum />} />
-            <Route path="admin" element={<Admin />} />
+
+            <Route element={<AdminOnlyRoute />}>
+              <Route path="admin" element={<Admin />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
