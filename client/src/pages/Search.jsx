@@ -10,6 +10,7 @@ const Search = () => {
   const [endDate, setEndDate] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [byUser, setByUser] = useState("");
 
   const fetchMessages = useCallback(() => {
     axios
@@ -28,7 +29,12 @@ const Search = () => {
     const start = startDate ? new Date(startDate) : new Date(0);
     const end = endDate ? new Date(endDate) : new Date();
 
-    return message.content.toLowerCase().includes(query.toLowerCase()) && date >= start && date <= end;
+    return (
+      message.content.toLowerCase().includes(query.toLowerCase()) &&
+      date >= start &&
+      date <= end &&
+      message.user.username.includes(byUser)
+    );
   });
 
   return (
@@ -49,9 +55,13 @@ const Search = () => {
 
       <div className={styles.filters}>
         <span>Entre le</span>
-        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+        <input type="datetime-local" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         <span>et le</span>
-        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+        <input type="datetime-local" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+      </div>
+      <div className={styles.filters}>
+        <span>Posté par @</span>
+        <input type="text" value={byUser} onChange={(e) => setByUser(e.target.value)} />
       </div>
 
       <hr className={styles.separator} />

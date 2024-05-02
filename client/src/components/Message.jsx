@@ -25,7 +25,9 @@ const Message = ({ message, showForumName, fetchMessages }) => {
           @{user.username}
           {user.isAdmin && <RiVerifiedBadgeFill />}
         </Link>
-        <span>· {formatDistance(new Date(message.date), new Date(), { addSuffix: true, locale: fr })}</span>
+        <span title={new Date(message.date)}>
+          · {formatDistance(new Date(message.date), new Date(), { addSuffix: true, locale: fr })}
+        </span>
       </div>
       {showForumName && <span className={styles.forumName}>Forum {displayForumName(message.forum)}</span>}
       <p>{message.content}</p>

@@ -14,8 +14,8 @@
 - [x] Un membre connecté peut supprimer ses propres messages depuis son profil
 - [x] Un membre connecté peut visualiser le profil d'autres membres
 - [x] Un membre connecté peut rechercher des messages par mots-clés
-- [ ] Un membre connecté peut rechercher des messages par intervalle de temps de publication
-- [ ] Un membre connecté peut rechercher des messages par auteur
+- [x] Un membre connecté peut rechercher des messages par intervalle de temps de publication
+- [x] Un membre connecté peut rechercher des messages par auteur
 
 - [x] Un admin peut accéder au forum fermé
 - [ ] Un admin peut donner ou retirer le statut admin à un autre utilisateur, sauf à lui-même
@@ -52,7 +52,7 @@
 - [x] Page de connexion, affichant les éventuelles erreurs de connexion
 - [x] Page d'inscription, affichant les éventuelles erreurs d'inscription
 - [x] Page de forum, qui affiche les messages du forum sélectionné, et permet de poster un message (et supprimer ses propres messages, ou ceux des autres si on est admin)
-- [x] Page de recherche, qui affiche les messages correspondant aux critères de recherche **(n'affiche pas les messages du forum fermé si l'utilisateur n'est pas admin)**
+- [x] Page de recherche, qui affiche les messages correspondant aux critères de recherche et permet de les filtrer **(n'affiche pas les messages du forum fermé si l'utilisateur n'est pas admin)**
 - [x] Page admin, accessible uniquement aux admins, qui permet de valider les inscriptions
 - [x] Page de profil, qui affiche les messages de l'utilisateur connecté (et permet de se déconnecter), ou bien d'un autre utilisateur après clic sur son nom depuis un message, liste ses messages (permet de supprimer les siens) et infos sur lui (est admin ?, date d'inscription, etc.)
 

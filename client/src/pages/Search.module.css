@@ -34,9 +34,12 @@
   gap: 1rem;
   margin-top: 1.5rem;
   flex-wrap: wrap;
+  font-weight: 500;
 }
 
-.filters input[type="date"] {
+.filters input[type="date"],
+.filters input[type="datetime-local"],
+.filters input[type="text"] {
   border: var(--border);
 }
 
