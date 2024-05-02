@@ -1,10 +1,15 @@
 import styles from "./UsersList.module.css";
 import { Link } from "react-router-dom";
-import { IoCheckmarkCircle, IoTrashBin } from "react-icons/io5";
+import { IoCheckmarkCircle, IoPersonRemove, IoTrashBin } from "react-icons/io5";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { verifyUser } from "../functions/admins";
+import { useContext } from "react";
+import { UserContext } from "../context/user";
 
 const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
+  const { loggedInUser } = useContext(UserContext);
+  const isMe = (user) => user._id === loggedInUser._id;
+
   if (verified && unverified) {
     throw new Error("Vous ne pouvez pas afficher les utilisateurs vérifiés et non vérifiés en même temps");
   }
@@ -52,6 +57,11 @@ const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
             {!user.isAdmin && user.isVerified && (
               <button className={styles.promote}>
                 <RiVerifiedBadgeFill /> Promouvoir
+              </button>
+            )}
+            {user.isAdmin && user.isVerified && !isMe(user) && (
+              <button className={styles.demote}>
+                <IoPersonRemove /> Rétrograder
               </button>
             )}
           </div>
