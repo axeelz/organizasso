@@ -102,6 +102,44 @@ class Messages {
       }
     });
   }
+
+  // Supprimer un message
+  delete(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const objId = new ObjectId(String(id));
+        const message = await this.db.collection("messages").deleteOne({ _id: objId });
+        if (message.deletedCount === 1) {
+          resolve();
+        } else {
+          reject({ error: { message: "Message non trouvé" } });
+        }
+      } catch (e) {
+        console.error(e);
+        reject({ error: { message: "Erreur lors de la suppression du message" } });
+      }
+    });
+  }
+
+  // Vérifier si un utilisateur est l'auteur d'un message
+  isAuthor(userId, messageId) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const objMessageId = new ObjectId(String(messageId));
+        const message = await this.db.collection("messages").findOne({ _id: objMessageId });
+        if (userId.equals(message.userId)) {
+          console.log("L'auteur est bien l'utilisateur connecté");
+          resolve(true);
+        } else {
+          console.log("L'auteur n'est pas l'utilisateur connecté");
+          resolve(false);
+        }
+      } catch (e) {
+        console.error(e);
+        reject({ error: { message: "Erreur lors de la vérification de l'auteur" } });
+      }
+    });
+  }
 }
 
 exports.default = Messages;

@@ -99,39 +99,12 @@ function init(db) {
       .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
-  // Récupérer un utilisateur
-  router
-    .route("/user/:user_id(\\d+)")
-    .get(async (req, res) => {
-      try {
-        const user = await users.get(req.params.user_id);
-        if (!user) res.sendStatus(404);
-        else res.send(user);
-      } catch (e) {
-        res.status(500).send(e);
-      }
-    })
-    .delete((req, res, next) => res.send(`delete user ${req.params.user_id}`));
-
   // Récupérer tous les utilisateurs
   router.get("/user", (req, res) => {
     users
       .getAll()
       .then((users) => res.status(200).send(users))
       .catch((err) => res.status(500).send(err));
-  });
-
-  // Mettre à jour un utilisateur
-  router.put("/user", (req, res) => {
-    const { login, password, lastname, firstname } = req.body;
-    if (!login || !password || !lastname || !firstname) {
-      res.status(400).send("Missing fields");
-    } else {
-      users
-        .create(login, password, lastname, firstname)
-        .then((user_id) => res.status(201).send({ id: user_id }))
-        .catch((err) => res.status(500).send(err));
-    }
   });
 
   // Récupérer les informations de l'utilisateur connecté
@@ -222,6 +195,28 @@ function init(db) {
     messages
       .getByForum(req.params.forum)
       .then((messages) => res.status(200).send(messages))
+      .catch((err) => res.status(500).send(err));
+  });
+
+  // Supprimer un message
+  router.delete("/message/:message_id", async (req, res) => {
+    // Vérifie si on est admin OU l'auteur du message
+    const messageId = req.params.message_id;
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    const loggedInUser = await users.get(req.session.userid);
+    if (!loggedInUser) {
+      return res.status(401).json({ status: 401, message: "Utilisateur inconnu" });
+    }
+    const isLoggedInUserAdmin = loggedInUser.isAdmin;
+    const isLoggedIdUserAuthor = await messages.isAuthor(loggedInUser._id, messageId);
+    if (!isLoggedInUserAdmin && !isLoggedIdUserAuthor) {
+      return res.status(403).json({ status: 403, message: "Non autorisé" });
+    }
+    messages
+      .delete(req.params.message_id)
+      .then(() => res.status(200).send("Message supprimé"))
       .catch((err) => res.status(500).send(err));
   });
 
