@@ -41,7 +41,7 @@ const Forum = () => {
           <BackButton to="/" text="Liste des forums" />
         </div>
         <NewMessage forumName={name} fetchMessages={fetchMessages} />
-        <MessagesList messages={messages} loading={loading} />
+        <MessagesList messages={messages} loading={loading} fetchMessages={fetchMessages} />
       </main>
     </>
   );

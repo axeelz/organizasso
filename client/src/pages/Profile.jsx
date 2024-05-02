@@ -101,7 +101,13 @@ const Profile = () => {
       </section>
 
       <h2>Messages ({messages.filter((m) => m.user.username === user.username).length})</h2>
-      <MessagesList messages={messages} username={user.username} loading={messagesLoading} showForumName />
+      <MessagesList
+        messages={messages}
+        username={user.username}
+        loading={messagesLoading}
+        showForumName
+        fetchMessages={fetchMessages}
+      />
     </main>
   );
 };

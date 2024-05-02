@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./Search.module.css";
 import MessagesList from "../components/MessagesList";
 import { IoSearchOutline } from "react-icons/io5";
@@ -11,17 +11,17 @@ const Search = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchMessages = () => {
-      axios
-        .get(import.meta.env.VITE_API_URL + "/message", { withCredentials: true })
-        .then((res) => setMessages(res.data))
-        .catch((err) => console.error(err))
-        .finally(() => setLoading(false));
-    };
-
-    fetchMessages();
+  const fetchMessages = useCallback(() => {
+    axios
+      .get(import.meta.env.VITE_API_URL + "/message", { withCredentials: true })
+      .then((res) => setMessages(res.data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    fetchMessages();
+  }, [fetchMessages]);
 
   const results = messages.filter((message) => {
     const date = new Date(message.date);
@@ -56,7 +56,7 @@ const Search = () => {
 
       <hr className={styles.separator} />
 
-      <MessagesList messages={results} loading={loading} showForumName />
+      <MessagesList messages={results} loading={loading} showForumName fetchMessages={fetchMessages} />
     </main>
   );
 };

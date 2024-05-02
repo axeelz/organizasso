@@ -3,16 +3,20 @@ import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Link } from "react-router-dom";
 import { BsFillReplyFill, BsFillTrashFill } from "react-icons/bs";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import NewMessage from "./NewMessage";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { IoTrashBin } from "react-icons/io5";
 import { displayForumName } from "../utils";
+import { deleteMessage } from "../functions/messages";
+import { toast } from "sonner";
+import { UserContext } from "../context/user";
 
-const Message = ({ message, showForumName }) => {
+const Message = ({ message, showForumName, fetchMessages }) => {
   const [isReplying, setIsReplying] = useState(false);
+  const { loggedInUser } = useContext(UserContext);
 
   const user = message.user;
+  const isLoggedInUserAuthor = loggedInUser._id === user._id;
 
   return (
     <div className={styles.message}>
@@ -30,20 +34,21 @@ const Message = ({ message, showForumName }) => {
           <BsFillReplyFill />
           <span>Répondre</span>
         </button>
-        <button>
-          <BsFillTrashFill />
-          <span>Supprimer</span>
-        </button>
-        {!user.isAdmin && (
-          <button>
-            <RiVerifiedBadgeFill />
-            <span>Rendre admin.</span>
-          </button>
-        )}
-        {!user.isAdmin && (
-          <button>
-            <IoTrashBin />
-            <span>Bannir</span>
+        {(isLoggedInUserAuthor || loggedInUser.isAdmin) && (
+          <button
+            onClick={() =>
+              deleteMessage(message._id)
+                .then(() => {
+                  toast.success("Message supprimé !");
+                  fetchMessages();
+                })
+                .catch((err) => {
+                  const { message } = err.response?.data || err;
+                  toast.error(message);
+                })
+            }>
+            <BsFillTrashFill />
+            <span>Supprimer</span>
           </button>
         )}
       </div>

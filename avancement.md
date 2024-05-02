@@ -11,7 +11,7 @@
 - [x] Un membre connecté peut créer des messages
 - [ ] Un membre connecté peut répondre à un message existant
 - [x] Un membre connecté peut visualiser son profil, contenant la liste de ses messages
-- [ ] Un membre connecté peut supprimer ses propres messages depuis son profil
+- [x] Un membre connecté peut supprimer ses propres messages depuis son profil
 - [x] Un membre connecté peut visualiser le profil d'autres membres
 - [x] Un membre connecté peut rechercher des messages par mots-clés
 - [ ] Un membre connecté peut rechercher des messages par intervalle de temps de publication
@@ -25,7 +25,7 @@
 
 ### Additionnel
 
-- [ ] Un admin peut supprimer les messages des autres utilisateurs depuis la liste des messages
+- [x] Un admin peut supprimer les messages des autres utilisateurs depuis la liste des messages
 - [ ] Un admin peut supprimer (bannir) un utilisateur
 
 ## Details de l'implémentation
@@ -51,10 +51,10 @@
 - [x] Page d'accueil, qui demande de se connecter ou affiche les forums accessibles
 - [x] Page de connexion, affichant les éventuelles erreurs de connexion
 - [x] Page d'inscription, affichant les éventuelles erreurs d'inscription
-- [x] Page de forum, qui affiche les messages du forum sélectionné, et permet de poster un message
+- [x] Page de forum, qui affiche les messages du forum sélectionné, et permet de poster un message (et supprimer ses propres messages, ou ceux des autres si on est admin)
 - [x] Page de recherche, qui affiche les messages correspondant aux critères de recherche **(n'affiche pas les messages du forum fermé si l'utilisateur n'est pas admin)**
 - [x] Page admin, accessible uniquement aux admins, qui permet de valider les inscriptions
-- [x] Page de profil, qui affiche les messages de l'utilisateur connecté (et permet de se déconnecter), ou bien d'un autre utilisateur après clic sur son nom depuis un message, liste ses messages et infos sur lui (est admin ?, date d'inscription, etc.)
+- [x] Page de profil, qui affiche les messages de l'utilisateur connecté (et permet de se déconnecter), ou bien d'un autre utilisateur après clic sur son nom depuis un message, liste ses messages (permet de supprimer les siens) et infos sur lui (est admin ?, date d'inscription, etc.)
 
 - [x] Contexte React qui vérifie si l'utilisateur est connecté, et donne accès à ses informations depuis n'importe quel composant. **Le statut de connexion de l'utilisateur est donc toujours à jour et préservé entre les rechargements de page**
 
