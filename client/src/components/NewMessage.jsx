@@ -4,7 +4,7 @@ import { IoIosSend } from "react-icons/io";
 import axios from "axios";
 import { toast } from "sonner";
 
-const NewMessage = ({ forumName, fetchMessages, isReply }) => {
+const NewMessage = ({ forumName, fetchMessages, isReplying, setIsReplying, replyTo }) => {
   const [message, setMessage] = useState("");
 
   const handleSend = () => {
@@ -14,6 +14,7 @@ const NewMessage = ({ forumName, fetchMessages, isReply }) => {
         {
           content: message,
           forum: forumName,
+          replyTo,
         },
         { withCredentials: true }
       )
@@ -21,6 +22,7 @@ const NewMessage = ({ forumName, fetchMessages, isReply }) => {
         setMessage("");
         toast.success("Message envoyé !");
         if (fetchMessages) fetchMessages();
+        if (setIsReplying) setIsReplying(false);
       })
       .catch((err) => {
         const { message } = err.response.data;
@@ -33,7 +35,7 @@ const NewMessage = ({ forumName, fetchMessages, isReply }) => {
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder={isReply ? "Répondre à ce message" : "Nouveau message"}
+        placeholder={isReplying ? "Répondre à ce message" : "Nouveau message"}
       />
       <button onClick={handleSend} className={styles.send}>
         <IoIosSend />

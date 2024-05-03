@@ -9,7 +9,7 @@
 - [x] Après connexion, l'utilisateur peut consulter le forum ouvert (et le forum fermé s'il est admin) depuis la page principale
 
 - [x] Un membre connecté peut créer des messages
-- [ ] Un membre connecté peut répondre à un message existant
+- [x] Un membre connecté peut répondre à un message existant
 - [x] Un membre connecté peut visualiser son profil, contenant la liste de ses messages
 - [x] Un membre connecté peut supprimer ses propres messages depuis son profil
 - [x] Un membre connecté peut visualiser le profil d'autres membres
@@ -76,11 +76,12 @@
 - [x] Passer un utilisateur au statut vérifié **(seul un admin peut le faire)**
 - [x] Passer un utilisateur au statut admin **(seul un admin peut le faire)**
 - [x] Retirer le statut admin à un utilisateur **(seul un admin peut le faire)**
-- [x] Supprimer un utilisateur **(seul un admin peut le faire)**
+- [x] Supprimer un utilisateur **(seul un admin peut le faire)**, supprime également tous ses messages
 
 - [x] Création d'un message, **seulement si l'utilisateur est connecté, vérifié (et admin s'il veut poster sur le forum fermé)**
 - [x] Récupérer la liste de tous les messages **(du forum ouvert et fermé si l'utilisateur est admin)**
 - [x] Récupérer la liste des messages d'un forum en particulier
+- [x] Supprimer un message **(seul l'auteur du message peut le faire, ou un admin)**, supprime également tous les messages qui lui répondent
 
 ### Autres
 
@@ -91,3 +92,6 @@ Cette approche permet de savoir exactement où se trouve le style associé à un
 ## Améliorations possibles
 
 - Permettre la création de plus de forums, au lieu d'avoir hardcodé un forum ouvert et un forum fermé
+- Permettre de répondre à des réponses, pour créer des fils de discussion
+- Valider les champs côté back-end (minimum de caractères, caractères spéciaux, etc.)
+- Permettre la recherche parle les réponses (actuellement on ne recherche que les messages principaux)

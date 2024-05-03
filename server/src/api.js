@@ -220,7 +220,7 @@ function init(db) {
     if (!user.isVerified) {
       return res.status(403).json({ status: 403, message: "Votre inscription n'a pas encore été validée" });
     }
-    const { content, forum } = req.body;
+    const { content, forum, replyTo } = req.body;
     if (!content || !forum) {
       return res.status(400).json({ status: 400, message: "Veuillez entrer un message" });
     }
@@ -229,7 +229,7 @@ function init(db) {
       return res.status(403).json({ status: 403, message: "Non autorisé" });
     }
     messages
-      .create(req.session.userid, content, forum)
+      .create(req.session.userid, content, forum, replyTo)
       .then((message_id) => res.status(201).json({ id: message_id }))
       .catch((err) => res.status(500).json({ status: 500, message: err }));
   });

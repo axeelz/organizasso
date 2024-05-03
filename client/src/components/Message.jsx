@@ -11,7 +11,7 @@ import { deleteMessage } from "../functions/messages";
 import { toast } from "sonner";
 import { UserContext } from "../context/user";
 
-const Message = ({ message, showForumName, fetchMessages }) => {
+const Message = ({ message, showForumName, fetchMessages, disableReplying }) => {
   const [isReplying, setIsReplying] = useState(false);
   const { loggedInUser } = useContext(UserContext);
 
@@ -32,10 +32,12 @@ const Message = ({ message, showForumName, fetchMessages }) => {
       {showForumName && <span className={styles.forumName}>Forum {displayForumName(message.forum)}</span>}
       <p>{message.content}</p>
       <div className={styles.messageFooter}>
-        <button onClick={() => setIsReplying(!isReplying)}>
-          <BsFillReplyFill />
-          <span>Répondre</span>
-        </button>
+        {!disableReplying && (
+          <button onClick={() => setIsReplying(!isReplying)}>
+            <BsFillReplyFill />
+            <span>Répondre</span>
+          </button>
+        )}
         {(isLoggedInUserAuthor || loggedInUser.isAdmin) && (
           <button
             onClick={() =>
@@ -56,9 +58,20 @@ const Message = ({ message, showForumName, fetchMessages }) => {
       </div>
       {isReplying && (
         <div className={styles.newMessage}>
-          <NewMessage isReply />
+          <NewMessage
+            forumName={message.forum}
+            fetchMessages={fetchMessages}
+            isReplying={isReplying}
+            setIsReplying={setIsReplying}
+            replyTo={message._id}
+          />
         </div>
       )}
+      <div className={styles.replies}>
+        {message.replies?.map((reply) => (
+          <Message key={reply._id} message={reply} fetchMessages={fetchMessages} disableReplying />
+        ))}
+      </div>
     </div>
   );
 };
