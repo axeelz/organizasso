@@ -18,7 +18,6 @@ class Messages {
         const newMessage = await this.db.collection("messages").insertOne(message);
         resolve(newMessage.insertedId);
       } catch (e) {
-        console.error(e);
         reject({ error: { message: "Erreur lors de la création du message" } });
       }
     });
@@ -56,7 +55,6 @@ class Messages {
           .toArray();
         resolve(messages);
       } catch (e) {
-        console.error(e);
         reject({ error: { message: "Erreur lors de la récupération des messages" } });
       }
     });
@@ -97,7 +95,6 @@ class Messages {
           .toArray();
         resolve(messages);
       } catch (e) {
-        console.error(e);
         reject({ error: { message: "Erreur lors de la récupération des messages" } });
       }
     });
@@ -115,7 +112,6 @@ class Messages {
           reject({ error: { message: "Message non trouvé" } });
         }
       } catch (e) {
-        console.error(e);
         reject({ error: { message: "Erreur lors de la suppression du message" } });
       }
     });
@@ -135,8 +131,7 @@ class Messages {
           resolve(false);
         }
       } catch (e) {
-        console.error(e);
-        reject({ error: { message: "Erreur lors de la vérification de l'auteur" } });
+        reject({ error: { message: "Message non trouvé" } });
       }
     });
   }

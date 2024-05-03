@@ -31,11 +31,16 @@ class Users {
   // Renvoie les informations d'un utilisateur par son id
   get(userid) {
     return new Promise(async (resolve, reject) => {
-      const objId = new ObjectId(String(userid));
-      const user = await this.db.collection("users").findOne({ _id: objId }, { projection: { password: 0 } });
-      if (user) {
-        resolve(user);
-      } else {
+      try {
+        const objId = new ObjectId(String(userid));
+        const user = await this.db.collection("users").findOne({ _id: objId }, { projection: { password: 0 } });
+        if (user) {
+          resolve(user);
+        } else {
+          reject({ error: { message: "Utilisateur inexistant" } });
+        }
+      } catch (e) {
+        // Cela signifie que l'ID n'est pas un ObjectId valide donc l'utilisateur n'existe forcément pas
         reject({ error: { message: "Utilisateur inexistant" } });
       }
     });
@@ -105,6 +110,33 @@ class Users {
     return new Promise(async (resolve, reject) => {
       const objId = new ObjectId(String(userId));
       await this.db.collection("users").updateOne({ _id: objId }, { $set: { isVerified: true } });
+      resolve();
+    });
+  }
+
+  // Rendre admin un utilisateur
+  async makeAdmin(userId) {
+    return new Promise(async (resolve, reject) => {
+      const objId = new ObjectId(String(userId));
+      await this.db.collection("users").updateOne({ _id: objId }, { $set: { isAdmin: true } });
+      resolve();
+    });
+  }
+
+  // Rétrograder un admin
+  async demoteAdmin(userId) {
+    return new Promise(async (resolve, reject) => {
+      const objId = new ObjectId(String(userId));
+      await this.db.collection("users").updateOne({ _id: objId }, { $set: { isAdmin: false } });
+      resolve();
+    });
+  }
+
+  // Supprimer un utilisateur
+  async delete(userId) {
+    return new Promise(async (resolve, reject) => {
+      const objId = new ObjectId(String(userId));
+      await this.db.collection("users").deleteOne({ _id: objId });
       resolve();
     });
   }

@@ -16,6 +16,8 @@ function init(db) {
 
   const users = new Users.default(db);
 
+  // Service d'authentification
+
   // Connexion
   router.post("/user/login", async (req, res) => {
     try {
@@ -93,18 +95,11 @@ function init(db) {
     const bcrypt = require("bcrypt");
     const workFactor = 8;
     const hash = await bcrypt.hash(password, workFactor);
+    // TODO: Empêcher un login trop court ou avec des caractères spéciaux
     users
       .create(login, hash, lastname, firstname)
       .then((user_id) => res.status(201).json({ id: user_id }))
       .catch((err) => res.status(500).json({ status: 500, message: err }));
-  });
-
-  // Récupérer tous les utilisateurs
-  router.get("/user", (req, res) => {
-    users
-      .getAll()
-      .then((users) => res.status(200).send(users))
-      .catch((err) => res.status(500).send(err));
   });
 
   // Récupérer les informations de l'utilisateur connecté
@@ -132,6 +127,16 @@ function init(db) {
     });
   });
 
+  // Service utilisateurs
+
+  // Récupérer tous les utilisateurs
+  router.get("/user", (req, res) => {
+    users
+      .getAll()
+      .then((users) => res.status(200).send(users))
+      .catch((err) => res.status(500).send(err));
+  });
+
   // Vérifier un utilisateur (seulement si l'utilisateur connecté est isAdmin)
   router.put("/user/verify", async (req, res) => {
     const userToVerify = req.body.userId;
@@ -139,9 +144,6 @@ function init(db) {
       return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
     }
     const user = await users.get(req.session.userid);
-    if (!user) {
-      return res.status(401).json({ status: 401, message: "Utilisateur inconnu" });
-    }
     if (!user.isAdmin) {
       return res.status(403).json({ status: 403, message: "Non autorisé" });
     }
@@ -151,6 +153,61 @@ function init(db) {
       .catch((err) => res.status(500).json({ status: 500, message: err }));
   });
 
+  // Rendre un utilisateur admin (seulement si l'utilisateur connecté est isAdmin)
+  router.put("/user/admin", async (req, res) => {
+    const userToAdmin = req.body.userId;
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    const user = await users.get(req.session.userid);
+    if (!user.isAdmin) {
+      return res.status(403).json({ status: 403, message: "Non autorisé" });
+    }
+    users
+      .makeAdmin(userToAdmin)
+      .then(() => res.status(200).json({ message: "Utilisateur promu admin" }))
+      .catch((err) => res.status(500).json({ status: 500, message: err }));
+  });
+
+  // Rétrograder un admin (seulement si l'utilisateur connecté est isAdmin)
+  router.put("/user/demote", async (req, res) => {
+    const userToDemote = req.body.userId;
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    const user = await users.get(req.session.userid);
+    if (!user.isAdmin) {
+      return res.status(403).json({ status: 403, message: "Non autorisé" });
+    }
+    users
+      .demoteAdmin(userToDemote)
+      .then(() => res.status(200).json({ message: "Admin rétrogradé" }))
+      .catch((err) => res.status(500).json({ status: 500, message: err }));
+  });
+
+  // Supprimer un utilisateur (seulement si l'utilisateur connecté est isAdmin)
+  router.delete("/user/:user_id", async (req, res) => {
+    const userIdToDelete = req.params.user_id;
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    const user = await users.get(req.session.userid);
+    if (!user.isAdmin) {
+      return res.status(403).json({ status: 403, message: "Non autorisé" });
+    }
+    try {
+      await users.get(userIdToDelete);
+    } catch (e) {
+      return res.status(404).json({ status: 404, message: "Utilisateur inconnu" });
+    }
+    users
+      .delete(userIdToDelete)
+      .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
+      .catch((err) => res.status(500).json({ status: 500, message: err }));
+  });
+
+  // Service messages
+
   const messages = new Messages.default(db);
 
   // Créer un message
@@ -158,9 +215,18 @@ function init(db) {
     if (!req.session.userid) {
       return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
     }
+    // Vérifie si l'utilisateur est vérifié
+    const user = await users.get(req.session.userid);
+    if (!user.isVerified) {
+      return res.status(403).json({ status: 403, message: "Votre inscription n'a pas encore été validée" });
+    }
     const { content, forum } = req.body;
     if (!content || !forum) {
       return res.status(400).json({ status: 400, message: "Veuillez entrer un message" });
+    }
+    // Vérifie si l'utilisateur est admin s'il veut créer un message dans un forum fermé
+    if (forum === "ferme" && !user.isAdmin) {
+      return res.status(403).json({ status: 403, message: "Non autorisé" });
     }
     messages
       .create(req.session.userid, content, forum)
@@ -174,9 +240,6 @@ function init(db) {
       return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
     }
     const user = await users.get(req.session.userid);
-    if (!user) {
-      return res.status(401).json({ status: 401, message: "Utilisateur inconnu" });
-    }
     if (user.isAdmin) {
       messages
         .getAll()
@@ -192,8 +255,24 @@ function init(db) {
 
   // Récupérer les messages d'un forum
   router.get("/message/:forum", (req, res) => {
+    const forum = req.params.forum;
+    // Vérifie si l'utilisateur est connecté
+    if (!req.session.userid) {
+      return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
+    }
+    // Vérifie si l'utilisateur est admin s'il veut voir les messages d'un forum fermé
+    if (forum === "ferme") {
+      users
+        .get(req.session.userid)
+        .then((user) => {
+          if (!user.isAdmin) {
+            return res.status(403).json({ status: 403, message: "Non autorisé" });
+          }
+        })
+        .catch((err) => res.status(500).send(err));
+    }
     messages
-      .getByForum(req.params.forum)
+      .getByForum(forum)
       .then((messages) => res.status(200).send(messages))
       .catch((err) => res.status(500).send(err));
   });
@@ -206,17 +285,19 @@ function init(db) {
       return res.status(401).json({ status: 401, message: "Non connecté, rechargez la page" });
     }
     const loggedInUser = await users.get(req.session.userid);
-    if (!loggedInUser) {
-      return res.status(401).json({ status: 401, message: "Utilisateur inconnu" });
-    }
     const isLoggedInUserAdmin = loggedInUser.isAdmin;
-    const isLoggedIdUserAuthor = await messages.isAuthor(loggedInUser._id, messageId);
-    if (!isLoggedInUserAdmin && !isLoggedIdUserAuthor) {
-      return res.status(403).json({ status: 403, message: "Non autorisé" });
-    }
     messages
-      .delete(req.params.message_id)
-      .then(() => res.status(200).send("Message supprimé"))
+      .isAuthor(loggedInUser._id, messageId)
+      .then((isAuthor) => {
+        if (!isLoggedInUserAdmin && !isAuthor) {
+          return res.status(403).json({ status: 403, message: "Non autorisé" });
+        } else {
+          messages
+            .delete(messageId)
+            .then(() => res.status(200).json({ message: "Message supprimé" }))
+            .catch((err) => res.status(500).send(err));
+        }
+      })
       .catch((err) => res.status(500).send(err));
   });
 

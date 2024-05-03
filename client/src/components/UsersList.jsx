@@ -2,7 +2,7 @@ import styles from "./UsersList.module.css";
 import { Link } from "react-router-dom";
 import { IoCheckmarkCircle, IoPersonRemove, IoTrashBin } from "react-icons/io5";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { verifyUser } from "../functions/admins";
+import { deleteUser, demoteAdmin, makeAdmin, verifyUser } from "../functions/admins";
 import { useContext } from "react";
 import { UserContext } from "../context/user";
 import { toast } from "sonner";
@@ -46,7 +46,19 @@ const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
           </div>
           <div className={styles.actions}>
             {!user.isAdmin && (
-              <button className={styles.danger}>
+              <button
+                className={styles.danger}
+                onClick={() => {
+                  deleteUser(user._id)
+                    .then(() => {
+                      fetchUsers();
+                      toast.success("Utilisateur supprimé !");
+                    })
+                    .catch((err) => {
+                      const { message } = err.response?.data || err;
+                      toast.error(message);
+                    });
+                }}>
                 <IoTrashBin /> Supprimer
               </button>
             )}
@@ -68,12 +80,36 @@ const UsersList = ({ users, loading, fetchUsers, verified, unverified }) => {
               </button>
             )}
             {!user.isAdmin && user.isVerified && (
-              <button className={styles.promote}>
+              <button
+                className={styles.promote}
+                onClick={() => {
+                  makeAdmin(user._id)
+                    .then(() => {
+                      fetchUsers();
+                      toast.success("Utilisateur promu !");
+                    })
+                    .catch((err) => {
+                      const { message } = err.response?.data || err;
+                      toast.error(message);
+                    });
+                }}>
                 <RiVerifiedBadgeFill /> Promouvoir
               </button>
             )}
             {user.isAdmin && user.isVerified && !isMe(user) && (
-              <button className={styles.demote}>
+              <button
+                className={styles.demote}
+                onClick={() => {
+                  demoteAdmin(user._id)
+                    .then(() => {
+                      fetchUsers();
+                      toast.success("Admin rétrogradé !");
+                    })
+                    .catch((err) => {
+                      const { message } = err.response?.data || err;
+                      toast.error(message);
+                    });
+                }}>
                 <IoPersonRemove /> Rétrograder
               </button>
             )}

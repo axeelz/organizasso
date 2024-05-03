@@ -18,7 +18,7 @@
 - [x] Un membre connecté peut rechercher des messages par auteur
 
 - [x] Un admin peut accéder au forum fermé
-- [ ] Un admin peut donner ou retirer le statut admin à un autre utilisateur, sauf à lui-même
+- [x] Un admin peut donner ou retirer le statut admin à un autre utilisateur, sauf à lui-même
 - [x] Un admin peut valider ou non le statut de membre à un utilisateur inscrit
 
 - [x] Un utilisateur peut se déconnecter
@@ -26,7 +26,7 @@
 ### Additionnel
 
 - [x] Un admin peut supprimer les messages des autres utilisateurs depuis la liste des messages
-- [ ] Un admin peut supprimer (bannir) un utilisateur
+- [x] Un admin peut supprimer (bannir) un utilisateur
 
 ## Details de l'implémentation
 
@@ -61,7 +61,7 @@
 - [x] Les pages Login et SignUp sont accessibles **uniquement si l'utilisateur n'est pas connecté**
 - [x] Les pages Profil, Recherche, Forum et Admin sont accessibles **uniquement si l'utilisateur est connecté**
 - [x] Le forum ouvert est accesible à tous mais le forum fermé est accessible **uniquement si l'utilisateur est admin**
-- [x] La page Admin est accessible **uniquement si l'utilisateur est admin**
+- [x] La page Admin est accessible **uniquement si l'utilisateur est admin**, elle permet de valider les inscriptions, passer un utilisateur au statut admin, retirer le statut admin à un utilisateur, et supprimer un utilisateur
 - [x] Une page inexistante ou accéder à la page profil d'un utilisateur inexistant affichent une page 404
 
 ### Back-end
@@ -74,8 +74,11 @@
 - [x] Récupérer les informations sur l'utilisateur dont la session est active (connecté)
 - [x] Déconnexion de l'utilisateur
 - [x] Passer un utilisateur au statut vérifié **(seul un admin peut le faire)**
+- [x] Passer un utilisateur au statut admin **(seul un admin peut le faire)**
+- [x] Retirer le statut admin à un utilisateur **(seul un admin peut le faire)**
+- [x] Supprimer un utilisateur **(seul un admin peut le faire)**
 
-- [x] Création d'un message
+- [x] Création d'un message, **seulement si l'utilisateur est connecté, vérifié (et admin s'il veut poster sur le forum fermé)**
 - [x] Récupérer la liste de tous les messages **(du forum ouvert et fermé si l'utilisateur est admin)**
 - [x] Récupérer la liste des messages d'un forum en particulier
 
