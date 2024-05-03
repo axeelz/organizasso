@@ -136,6 +136,8 @@ class Users {
   async delete(userId) {
     return new Promise(async (resolve, reject) => {
       const objId = new ObjectId(String(userId));
+      // On supprime tous les messages de l'utilisateur
+      await this.db.collection("messages").deleteMany({ userId: objId });
       await this.db.collection("users").deleteOne({ _id: objId });
       resolve();
     });
