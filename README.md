@@ -25,7 +25,7 @@
 - Node.js >= v20.6.0
 - MongoDB installé en local tournant sur localhost:27017
 - Une base de données nommée `organizasso` créée dans MongoDB contenant les collections `users` et `messages`
-- Un fichier `.env` dans le dossier `client` contenant les variables d'environnement définies dans le fichier `.env.example`
+- Un fichier `.env` dans le dossier `client` et un dans le dossier `server` contenant les variables d'environnement définies dans le fichier `.env.example` propre à leur dossier
 
 ### 👉 Pour lancer le front-end
 
