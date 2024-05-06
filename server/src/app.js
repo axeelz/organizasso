@@ -8,13 +8,18 @@ console.debug(`Base directory: ${basedir}`);
 
 express = require("express");
 const app = express();
-// api_1 = require("./api.js");
+
 const session = require("express-session");
 app.set("trust proxy", 1);
 
+if (!process.env.SESSION_SECRET) {
+  console.error("SESSION_SECRET is not defined in the environment");
+  process.exit(1);
+}
+
 app.use(
   session({
-    secret: "technoweb rocks",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
     cookie: {
