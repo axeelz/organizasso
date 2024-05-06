@@ -1,4 +1,4 @@
-# Avancement du projet au 29/04/2024
+# Avancement du projet au 06/05/2024
 
 [![logo d'Organiz'Asso](https://i.postimg.cc/qBCk5yGJ/logo.png)](https://postimg.cc/WtTLDDKC)
 
@@ -96,3 +96,4 @@ Cette approche permet de savoir exactement où se trouve le style associé à un
 - Permettre de répondre à des réponses, pour créer des fils de discussion
 - Valider les champs côté back-end (minimum de caractères, caractères spéciaux, etc.)
 - Permettre la recherche parle les réponses (actuellement on ne recherche que les messages principaux)
+- Pouvoir modifier et supprimer son compte
