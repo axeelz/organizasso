@@ -27,6 +27,7 @@
 
 - [x] Un admin peut supprimer les messages des autres utilisateurs depuis la liste des messages
 - [x] Un admin peut supprimer (bannir) un utilisateur
+- [x] L'application est entièrement responsive 
 
 ## Details de l'implémentation
 
