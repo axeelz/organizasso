@@ -12,7 +12,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.21.0",
     "express-session": "^1.17.1",
     "mongodb": "^6.5.0",
     "nodemon": "^3.1.0",
